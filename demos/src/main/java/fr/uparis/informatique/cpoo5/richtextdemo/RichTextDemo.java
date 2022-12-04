@@ -11,8 +11,7 @@ public class RichTextDemo extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-         
+        
 
         VBox root = new VBox();
         
