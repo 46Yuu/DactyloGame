@@ -28,7 +28,12 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>11</version>
+      <version>12.0.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>19-ea+2</version>
     </dependency>
   </dependencies>
 
@@ -78,9 +83,9 @@
         <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
-          <version>0.0.1</version>
+          <version>0.0.8</version>
           <configuration>
-              <mainClass>com.modele.Modele</mainClass>
+              <mainClass>com.example.App</mainClass>
           </configuration>
         </plugin>
       </plugins>

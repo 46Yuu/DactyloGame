@@ -1,7 +1,6 @@
-package com.modele;
+package com.example.modele;
 
-import com.vue.*;
-/*import richtext.StyleClassedTextArea;*/
+import com.example.vue.*;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -9,7 +8,7 @@ import javafx.stage.Stage;
 
 
 public class Modele {
-    private Vue vue;
+    /*private Vue vue;
     Modele(Vue vue){
         this.vue = vue;
     }
@@ -17,7 +16,7 @@ public class Modele {
     {
         Modele mod = new Modele(new Vue());
         mod.vue.launching(args);
-    }
+    }*/
 
 }
 

@@ -1,4 +1,6 @@
-package com.vue;
+package com.example.vue;
+
+import com.example.modele.*;
 
 //import org.fxmisc.richtext.StyleClassedTextArea;
 import javafx.application.Application;
@@ -6,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import com.modele.*;
 
 
 public class Vue extends Application{
