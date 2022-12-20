@@ -1,0 +1,5 @@
+com/example/App.class
+com/example/vue/Vue.class
+com/example/modele/Modele.class
+com/example/controller/MainSceneController.class
+com/example/modele/Modele$Listener.class
