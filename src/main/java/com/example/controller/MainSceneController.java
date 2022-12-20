@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
 import com.example.modele.Modele;
@@ -15,11 +16,14 @@ public class MainSceneController {
     Modele modele;
 
     @FXML
+    private InlineCssTextArea ictaArea;
+
+    @FXML
     private StyleClassedTextArea staArea;
 
 
     @FXML
-    void btnGo(ActionEvent event) {
+    void btnSta(ActionEvent event) {
         /*Stage mainWindow = (Stage) tfTitle.getScene().getWindow();
         String title = tfTitle.getText();
         mainWindow.setTitle(title);*/
@@ -41,7 +45,14 @@ public class MainSceneController {
 
     public void setModele(Modele modele) {
         this.modele = modele;
-        modele.addListener(l -> staArea.replaceText(l.getBeginningText()));
+        modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());});
+    }
+
+    @FXML
+    void btIcta(ActionEvent event) {
+        //Met la couleur rouge au texte de la position 0 à la position 10
+        ictaArea.setStyle(0, 10, "-fx-fill: red;");
+        
     }
 
     

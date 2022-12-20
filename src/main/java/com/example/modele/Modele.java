@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 
 public class Modele {
+
+    /**
+     * TODO Utiliser une liste de paire d'entier pour savoir quelles position colorier
+     */
     public interface Listener {
         void onChange(Modele modele);
     }
