@@ -1,5 +1,9 @@
 com/example/App.class
+com/example/modele/Parametre.class
+com/example/modele/Jeu.class
+com/example/controller/MainSceneController.class
+com/example/modele/Parametre$1.class
+com/example/modele/Parametre$Builder.class
 com/example/vue/Vue.class
 com/example/modele/Modele.class
-com/example/controller/MainSceneController.class
 com/example/modele/Modele$Listener.class

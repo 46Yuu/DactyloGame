@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#windowOnKeyTyped" prefHeight="533.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.MainSceneController">
    <children>
       <Label layoutX="42.0" layoutY="19.0" prefHeight="56.0" prefWidth="310.0" text="Label" />
-      <Button layoutX="36.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnSta" text="bouton sta" />
+       <Button layoutX="36.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnSta" text="bouton sta" />
       <StyleClassedTextArea fx:id="staArea" layoutX="36.0" layoutY="87.0" onKeyTyped="#areaOnKeyTyped" prefHeight="199.0" prefWidth="515.0" />
       <InlineCssTextArea fx:id="ictaArea" layoutX="36.0" layoutY="292.0" prefHeight="218.0" prefWidth="515.0" />
       <Button layoutX="422.0" layoutY="63.0" mnemonicParsing="false" onAction="#btIcta" text="bouton icta" />
