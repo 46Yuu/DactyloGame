@@ -33,7 +33,7 @@ public class MainSceneController {
 
     @FXML
     void areaOnKeyTyped(KeyEvent event) {
-        //System.out.println("\nUne key typed:  " + event.getCharacter());
+        //System.out.println("\nUne key typed:  " + event.getCharacter());  
 
     }
 
@@ -47,6 +47,7 @@ public class MainSceneController {
         this.modele = modele;
         modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());});
     }
+    
 
     @FXML
     void btIcta(ActionEvent event) {

@@ -1,8 +1,9 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import com.example.modele.Parametre;
 
 /**
  * Unit test for simple App.
@@ -10,11 +11,26 @@ import org.junit.Test;
 public class AppTest 
 {
     /**
-     * Rigorous Test :-)
+     * Just a Junit test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
+    public void testTjunit()
     {
-        assertTrue( true );
+        System.out.println("It's working");
+    }
+
+    /**
+     * Test du bon fonctionnement du patron monteur des paramètres
+     */
+    @Test
+    public void testParametres(){
+        Parametre soloNormal = Parametre.builder()
+        .vitesse(4.0)
+        .frequenceBonus(0)
+        .texteATaper("Lorem ipsum dolor sit amet, consectetur adipiscing")
+        .mode("Solo Normal")
+        .vies(0)
+        .niveau(0).build();
+        System.out.println(soloNormal);
     }
 }
