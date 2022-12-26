@@ -9,6 +9,11 @@ public class Jeu {
 
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
     private LinkedList<String> file;
+    private LinkedList<String> fileSnd;
+
+    public Jeu(Parametre p) {
+        parametre = p;
+    }
 
     /*
      * Vérifie si la file est pleine ou non. Renvoie true si il ya encore de l'espace et false sinon
@@ -18,25 +23,60 @@ public class Jeu {
     }
 
     /*
-     * Ajoute un mot à la file si bien sur il y'a de l'espace
+     * Ajoute le prochain mot à la file
      */
-    public void ajoutMotALaFile(String  mot){
-        if(fileNonPleine()) file.add(mot);
+    public String ajoutMotALaFile(){
+        //On enleve le premier élement de la fileTemp qu'on ajoute à la fin de la file
+        if(!fileSnd.isEmpty())
+        {
+            String s = fileSnd.removeFirst();
+            file.add(s);
+            return s;
+        }
+        return "";
 
     }
 
     /*
-     * Supprime le mot en tête de file pour la validation
+     * Supprime le mot en tête de file pour la validation et rajoute le prochain puis le retourne pour
+     * son affichage sur l'nterface graphique
      */
-    public void validerMot(){
-        if(!file.isEmpty()) System.out.println(file.removeFirst());
+    public String validerMot(){
+        if(!file.isEmpty()) file.removeFirst();
+        String s = ajoutMotALaFile();
+        return s;
     }
 
     /*
-     * TODO: les test unitaires
-     * voir avec Henri pour la file
-     * Creer les interfaces des autres jeux
-     * Remplir la file
+     * Initialize la file des éléments à taper
      */
+    public void initializerFiles(){
+        file = new LinkedList<String>();
+        fileSnd = new LinkedList<String>();
+        String[] texteSplit = parametre.getTexteATaper().split(" ");
+        for (int i=0; i < texteSplit.length; i++)
+        {
+            //System.out.println(texteSplit[i]);
+            fileSnd.add(texteSplit[i]);
+        }
+
+
+        //Ensuite on envoie les 15 premiers mots dans la file principale
+        for (int i=0; i < 15; i++)
+        {
+            //System.out.println(texteSplit[i]);
+            ajoutMotALaFile();
+        }
+    }
+
+    public LinkedList<String> getFile() {
+        return file;
+    }
+
+    public LinkedList<String> getFileSnd() {
+        return fileSnd;
+    }
+
+    
     
 }

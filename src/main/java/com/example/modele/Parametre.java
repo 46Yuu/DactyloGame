@@ -78,6 +78,10 @@ public class Parametre {
         return "Parametre [vitesse=" + vitesse + ", frequenceBonus=" + frequenceBonus + ", texteATaper=" + texteATaper
                 + ", mode=" + mode + ", vies=" + vies + ", niveau=" + niveau + "]";
     }
+
+    public String getTexteATaper() {
+        return texteATaper;
+    }
     
     
 }
