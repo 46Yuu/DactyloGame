@@ -1,9 +1,18 @@
 package com.example.modele;
 
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Jeu {
     private Parametre parametre;
+    private int charUtiles = 0;
+    private int charUtilesTemporaire = 0;
+    private int nbAppuiTouches = 0;
+    private Timer timer;
+    private int resPourCalculMoyenne = 0;
+    private int tempsEntreChaqueCharUtile = 0;
+    boolean timerActive = false;
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
 
@@ -13,6 +22,7 @@ public class Jeu {
 
     public Jeu(Parametre p) {
         parametre = p;
+        this.initializerFiles();
     }
 
     /*
@@ -47,6 +57,7 @@ public class Jeu {
         return s;
     }
 
+    
     /*
      * Initialize la file des éléments à taper
      */
@@ -76,7 +87,58 @@ public class Jeu {
     public LinkedList<String> getFileSnd() {
         return fileSnd;
     }
+    
+    public void incrCharUtilesTemporaire() {
+        charUtilesTemporaire++;
+    }
+    public void decrCharUtilesTemporaire() {
+        charUtilesTemporaire--;
+    }
 
-    
-    
+    public void incrNbAppuiTouches() {
+        nbAppuiTouches++;
+    }
+
+    public void ajoutCharUtilesTemporaire(){
+        charUtiles += charUtilesTemporaire;
+    }
+
+    public void resetCharUtilesTemporaire(){
+        charUtilesTemporaire = 0;
+    }
+
+    public void ajoutTempsCharUtile(){
+        resPourCalculMoyenne+=tempsEntreChaqueCharUtile;
+        tempsEntreChaqueCharUtile = 0;
+    }
+
+    public void startTimerNormal(){
+        timerActive = true;
+        timer = new Timer();
+        TimerTask taskCounterEcartType = new TimerTask() {
+            @Override
+            public void run() {
+                tempsEntreChaqueCharUtile++;
+            }
+        };
+        TimerTask task = new TimerTask(){ 
+            @Override
+            public void run(){
+                int mpm = (charUtiles/1)/5;
+                int precision = (charUtiles/nbAppuiTouches)*100;
+                int ecartType = resPourCalculMoyenne/charUtiles;
+                System.out.println("----------STATS----------");
+                System.out.println("Vitesse : "+mpm);
+                System.out.println("Précision : "+precision);
+                System.out.println("Regularité : "+ecartType);
+                timer.cancel();
+            }
+        };
+        timer.scheduleAtFixedRate(taskCounterEcartType,0*1000, 1*1000);
+        timer.schedule(task,60*1000); 
+    }
+
+    public boolean getTimerActive(){
+        return timerActive;
+    }
 }

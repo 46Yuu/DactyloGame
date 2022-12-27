@@ -20,72 +20,71 @@ public class MainSceneController {
 
     @FXML
     void areaOnKeyPressed(KeyEvent event){
+        if (!modele.getJeu().getTimerActive()){
+            modele.getJeu().startTimerNormal();
+            if(modele.getJeu().getTimerActive()){System.out.println("timer is active");} else {System.out.println("timer not active");}
+        }
         int caretPos = ictaArea.getCaretPosition();
         String charTyped = event.getText();
         System.out.println("Une key typed:  " + charTyped);
         System.out.println(ictaArea.getText(caretPos, caretPos+1));
-        if(charTyped.compareTo(ictaArea.getText(caretPos, caretPos+1)) == 0){
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green;");
-            ictaArea.moveTo(caretPos+1);
+        if(event.getCode() == KeyCode.SPACE){
+            verificationMot(caretPos);
+        }
+        else if(charTyped.compareTo(ictaArea.getText(caretPos, caretPos+1)) == 0){
+            charCorrecte(caretPos);
         }
         else if(event.getCode() == KeyCode.BACK_SPACE){
-            ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black;");
-            ictaArea.moveTo(caretPos-1);
+            backSpace(caretPos);
         }
         else if(!event.getCode().isLetterKey()){
             event.consume();
         }
-        else if(event.getCode() == KeyCode.SPACE){
-            //valider 
-        }
         else{
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red;");
-            ictaArea.moveTo(caretPos+1);
+            charIncorrecte(caretPos);
         }
     }
 
-    @FXML
-    void windowOnKeyTyped(KeyEvent event) {
-        /*int caretPos = ictaArea.getCaretPosition();
-        String charTyped = event.getCharacter();
-        System.out.println("Une key typed:  " + charTyped);
-        System.out.println(ictaArea.getText(caretPos, caretPos+1));
-        if(charTyped.compareTo(ictaArea.getText(caretPos, caretPos+1)) == 0){
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green;");
-            ictaArea.moveTo(caretPos+1);
-        }
-        else{
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red;");
-            ictaArea.moveTo(caretPos+1);
-        }*/
-        
+    private void charCorrecte(int caretPos){
+        ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green;");
+        modele.getJeu().incrCharUtilesTemporaire();
+        modele.getJeu().incrNbAppuiTouches();
+        modele.getJeu().ajoutTempsCharUtile();
+        ictaArea.moveTo(caretPos+1);
     }
 
-    /*@FXML
-    void windowOnKeyPressed(KeyEvent event){
-        int caretPos = ictaArea.getCaretPosition();
-        String charTyped = event.getText();
-        System.out.println("Une key typed:  " + charTyped);
-        System.out.println(ictaArea.getText(caretPos, caretPos+1));
-        if(charTyped.compareTo(ictaArea.getText(caretPos, caretPos+1)) == 0){
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green;");
-            ictaArea.moveTo(caretPos+1);
-        }
-        else if(event.getCode() == KeyCode.BACK_SPACE){
-            ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black;");
-            ictaArea.moveTo(caretPos-1);
-        }
-        else if(event.getCode() == KeyCode.SHIFT){
-            System.out.println("shift");
-        }
-        else if(event.getCode() == KeyCode.SPACE){
+    private void charIncorrecte(int caretPos){
+        ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red;");
+        modele.getJeu().incrNbAppuiTouches();
+        ictaArea.moveTo(caretPos+1);
 
+    }
+
+    private void backSpace(int caretPos){
+        ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black;");
+        String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
+        if(previousCharStyle.compareTo("-fx-fill: green;") == 0){
+            modele.getJeu().decrCharUtilesTemporaire();
         }
-        else{
-            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red;");
-            ictaArea.moveTo(caretPos+1);
+        ictaArea.moveTo(caretPos-1);
+    }
+
+    private void verificationMot(int caretPos){
+        int memCaretPos = caretPos;
+        String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
+        boolean motCorrecte = true;
+        while (ictaArea.getText(caretPos-1, caretPos).compareTo(" ")==1 && motCorrecte == true){
+            motCorrecte = (previousCharStyle.compareTo("-fx-fill: green;") == 0)?true:false;
+            caretPos--;
         }
-    }*/
+        if(motCorrecte){
+            System.out.println("Mot correcte");
+            modele.getJeu().ajoutCharUtilesTemporaire();
+        }
+        modele.getJeu().resetCharUtilesTemporaire();
+        modele.getJeu().validerMot();
+        ictaArea.moveTo(memCaretPos+1);
+    }
 
     public void setModele(Modele modele) {
         this.modele = modele;
@@ -95,5 +94,4 @@ public class MainSceneController {
 
     }
     
-
 }

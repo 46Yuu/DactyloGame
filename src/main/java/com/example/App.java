@@ -14,7 +14,7 @@ import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.StyledTextArea;
 
 import com.example.controller.MainSceneController;
-import com.example.modele.Modele;
+import com.example.modele.*;
 
 /**
  * Hello world!
@@ -29,6 +29,16 @@ public class App extends Application
         launch(args);
     }
 
+    public Parametre creationParametreSoloNormal(){
+        return Parametre.builder()
+        .vitesse(4.0)
+        .frequenceBonus(0)
+        .texteATaper("Lorem ipsum dolor sit amet consectetur adipiscing erzzer rzerze rezrez rzerzer rzrer erzerz erzre erezr sdfsfd fdsfs fsdfesd fsdfds")
+        .mode("Solo Normal")
+        .vies(0)
+        .niveau(0).build();
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -39,7 +49,8 @@ public class App extends Application
             //Parent root = FXMLLoader.load(url);
             Parent root = loader.load();
             MainSceneController controller = loader.getController();
-            Modele modele = new Modele();
+            Jeu jeu = new Jeu(creationParametreSoloNormal());
+            Modele modele = new Modele(jeu);
             controller.setModele(modele);
             modele.initialize();
 

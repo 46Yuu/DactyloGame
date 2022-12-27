@@ -48,7 +48,6 @@ public class AppTest
         .mode("Solo Normal")
         .vies(0)
         .niveau(0).build();
-
     }
 
     public <U> void afficherListe(LinkedList<U> liste){

@@ -15,6 +15,13 @@ public class Modele {
     /**
      * TODO Utiliser une liste de paire d'entier pour savoir quelles position colorier
      */
+
+    private Jeu jeu;
+
+    public Modele(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
     public interface Listener {
         void onChange(Modele modele);
     }
@@ -37,9 +44,9 @@ public class Modele {
     }
 
     public void initialize(){
-        beginningText = "Lorem ipsum dolor sit amet " + 
+        beginningText = "lorem ipsum dolor sit amet " + 
         
-        "Praesent non sodales ex Donec posuere vestibulum leo vel scelerisque nibh commodo nec Sed ultrices " + 
+        "praesent non sodales ex donec posuere vestibulum leo vel scelerisque nibh commodo nec sed ultrices " + 
         "sagittis aliquam Proin quam quam tincidunt sit amet pulvinar id suscipit ut lacus Nunc eget sagittis " + 
         "arcu Fusce vulputate scelerisque lacus non tempus Integer cursus vulputate justo vitae maximus tellus " + 
         "fermentum consectetur Suspendisse vestibulum dolor et metus tincidunt fermentum";
@@ -54,5 +61,8 @@ public class Modele {
         listeners.stream().forEach(l -> l.onChange(this));
     }
 
+    public Jeu getJeu(){
+        return jeu;
+    }
 }
 
