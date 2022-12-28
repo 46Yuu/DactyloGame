@@ -45,7 +45,6 @@ public class Modele {
 
     public void initialize(){
         beginningText = "lorem ipsum dolor sit amet " + 
-        
         "praesent non sodales ex donec posuere vestibulum leo vel scelerisque nibh commodo nec sed ultrices " + 
         "sagittis aliquam Proin quam quam tincidunt sit amet pulvinar id suscipit ut lacus Nunc eget sagittis " + 
         "arcu Fusce vulputate scelerisque lacus non tempus Integer cursus vulputate justo vitae maximus tellus " + 

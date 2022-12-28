@@ -1,18 +1,20 @@
 package com.example.modele;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Jeu {
     private Parametre parametre;
-    private int charUtiles = 0;
-    private int charUtilesTemporaire = 0;
-    private int nbAppuiTouches = 0;
+    private double charUtiles = 0;
+    private double charUtilesTemporaire = 0;
+    private double nbAppuiTouches = 0;
     private Timer timer;
     private int resPourCalculMoyenne = 0;
     private int tempsEntreChaqueCharUtile = 0;
     boolean timerActive = false;
+    DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
 
@@ -124,21 +126,32 @@ public class Jeu {
         TimerTask task = new TimerTask(){ 
             @Override
             public void run(){
-                int mpm = (charUtiles/1)/5;
-                int precision = (charUtiles/nbAppuiTouches)*100;
-                int ecartType = resPourCalculMoyenne/charUtiles;
+                double mpm = (charUtiles/1)/5;
+                System.out.println("char utiles : "+charUtiles);
+                System.out.println("appuie touches : "+nbAppuiTouches);
+                double precision = (charUtiles/nbAppuiTouches)*100;
+                double ecartType = calculEcartType();
                 System.out.println("----------STATS----------");
                 System.out.println("Vitesse : "+mpm);
-                System.out.println("Précision : "+precision);
-                System.out.println("Regularité : "+ecartType);
+                System.out.println("Précision : "+df.format(precision));
+                System.out.println("Regularité : "+df.format(ecartType));
                 timer.cancel();
             }
         };
         timer.scheduleAtFixedRate(taskCounterEcartType,0*1000, 1*1000);
-        timer.schedule(task,60*1000); 
+        timer.schedule(task,30*1000); 
     }
 
     public boolean getTimerActive(){
         return timerActive;
+    }
+
+    private double calculEcartType(){
+        if(charUtiles == 0){
+            return 0;
+        }
+        else{
+            return resPourCalculMoyenne/charUtiles;
+        }
     }
 }

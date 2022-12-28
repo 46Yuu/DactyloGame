@@ -20,10 +20,7 @@ public class MainSceneController {
 
     @FXML
     void areaOnKeyPressed(KeyEvent event){
-        if (!modele.getJeu().getTimerActive()){
-            modele.getJeu().startTimerNormal();
-            if(modele.getJeu().getTimerActive()){System.out.println("timer is active");} else {System.out.println("timer not active");}
-        }
+        startTimer();
         int caretPos = ictaArea.getCaretPosition();
         String charTyped = event.getText();
         System.out.println("Une key typed:  " + charTyped);
@@ -42,6 +39,13 @@ public class MainSceneController {
         }
         else{
             charIncorrecte(caretPos);
+        }
+    }
+
+    private void startTimer(){
+        if (!modele.getJeu().getTimerActive()){
+            modele.getJeu().startTimerNormal();
+            if(modele.getJeu().getTimerActive()){System.out.println("timer is active");} else {System.out.println("timer not active");}
         }
     }
 
@@ -78,7 +82,6 @@ public class MainSceneController {
             caretPos--;
         }
         if(motCorrecte){
-            System.out.println("Mot correcte");
             modele.getJeu().ajoutCharUtilesTemporaire();
         }
         modele.getJeu().resetCharUtilesTemporaire();
@@ -89,6 +92,7 @@ public class MainSceneController {
     public void setModele(Modele modele) {
         this.modele = modele;
         ictaArea.setEditable(false);
+        ictaArea.setWrapText(true);
         //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
         modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
 
