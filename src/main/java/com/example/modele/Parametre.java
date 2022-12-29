@@ -1,5 +1,12 @@
 package com.example.modele;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Parametre {
     private double vitesse;
     private double frequenceBonus;
@@ -19,7 +26,7 @@ public class Parametre {
     public static class Builder{
         private double vitesse;
         private double frequenceBonus;
-        private String texteATaper;
+        private String texteATaper = "";
         private String mode;
         private int vies;
         private int niveau;
@@ -35,9 +42,33 @@ public class Parametre {
             frequenceBonus = val;
             return this;
         }
-
+        /* 
         public Builder texteATaper(String val){
             texteATaper = val;
+            return this;
+        }*/
+
+        public Builder texteATaper(){
+            try {
+                BufferedReader read = new BufferedReader(new FileReader("./src/main/resources/francais200.txt"));
+                String ligne = read.readLine();
+                ArrayList<String> listeMots = new ArrayList<String>();
+                while(ligne != null){
+                    listeMots.add(ligne);
+                    ligne = read.readLine();
+                }
+                Random rand = new Random();
+                for(int i = 0; i < 50; i++){
+                    texteATaper += listeMots.get(rand.nextInt(listeMots.size()))+" ";
+                }
+                read.close();
+            }
+            catch (FileNotFoundException e){
+                e.printStackTrace();
+            } 
+            catch (IOException e){
+                e.printStackTrace();
+            }
             return this;
         }
 
@@ -83,5 +114,8 @@ public class Parametre {
         return texteATaper;
     }
     
+    public String getMode() {
+        return mode;
+    }
     
 }

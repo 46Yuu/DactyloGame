@@ -14,6 +14,7 @@ public class Jeu {
     private int resPourCalculMoyenne = 0;
     private int tempsEntreChaqueCharUtile = 0;
     boolean timerActive = false;
+    boolean bonus = false;
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
@@ -51,11 +52,19 @@ public class Jeu {
 
     /*
      * Supprime le mot en tête de file pour la validation et rajoute le prochain puis le retourne pour
-     * son affichage sur l'nterface graphique
+     * son affichage sur l'interface graphique
      */
     public String validerMot(){
+        String s = "";
         if(!file.isEmpty()) file.removeFirst();
-        String s = ajoutMotALaFile();
+        if(parametre.getMode().compareTo("jeu")==0){
+            if(file.size()<8){
+                s = ajoutMotALaFile();
+            }
+        }
+        else {
+            s = ajoutMotALaFile();
+        }
         return s;
     }
 
@@ -84,6 +93,18 @@ public class Jeu {
 
     public LinkedList<String> getFile() {
         return file;
+    }
+
+    public Parametre getParametre(){
+        return parametre;
+    }
+
+    public String getStringOfFile(){
+        String res = " ";
+        for(int i = 0;i<file.size(); i++){
+            res += file.get(i)+" ";
+        }
+        return res;
     }
 
     public LinkedList<String> getFileSnd() {
@@ -126,7 +147,7 @@ public class Jeu {
         TimerTask task = new TimerTask(){ 
             @Override
             public void run(){
-                double mpm = (charUtiles/1)/5;
+                double mpm = (charUtiles/(0.5))/5;
                 System.out.println("char utiles : "+charUtiles);
                 System.out.println("appuie touches : "+nbAppuiTouches);
                 double precision = (charUtiles/nbAppuiTouches)*100;
@@ -142,6 +163,27 @@ public class Jeu {
         timer.schedule(task,30*1000); 
     }
 
+    /* 
+     * TimerTask taskCounterEcartType = new TimerTask() {
+            @Override
+            public void run() {
+                if(file.size() == 15){
+                    trouver un moyen de lancer verificationMot(caretPos) d'ici , ou mettre ce timertask+schedule dans mainSceneController
+                }
+                else {
+                    ajoutMotALaFile();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(taskAjoutMot, 0*1000, vitesse(niveau);
+    */
+    public long vitesse(int niveau){
+        return 3*Math.round(Math.pow((0.9),niveau))*1000;
+    }
+
+    public Timer getTimer(){
+        return this.timer;
+    }
     public boolean getTimerActive(){
         return timerActive;
     }
@@ -153,5 +195,12 @@ public class Jeu {
         else{
             return resPourCalculMoyenne/charUtiles;
         }
+    }
+
+    public boolean getBonus(){
+        return bonus;
+    }
+    public void setBonus(Boolean newBool){
+        bonus = newBool;
     }
 }

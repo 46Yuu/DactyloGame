@@ -33,7 +33,7 @@ public class App extends Application
         return Parametre.builder()
         .vitesse(4.0)
         .frequenceBonus(0)
-        .texteATaper("Lorem ipsum dolor sit amet consectetur adipiscing erzzer rzerze rezrez rzerzer rzrer erzerz erzre erezr sdfsfd fdsfs fsdfesd fsdfds")
+        .texteATaper()
         .mode("Solo Normal")
         .vies(0)
         .niveau(0).build();
