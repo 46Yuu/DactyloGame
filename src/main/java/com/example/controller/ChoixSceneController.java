@@ -46,6 +46,8 @@ public class ChoixSceneController {
             Modele modele = new Modele(jeu);
             controller.setModele(modele);
             modele.initialize();
+            controller.initializeScene();
+            
 
             stage.setScene(new Scene(root));  
             stage.show();
@@ -72,6 +74,7 @@ public class ChoixSceneController {
             Modele modele = new Modele(jeu);
             controller.setModele(modele);
             modele.initialize();
+            controller.initializeScene();
 
             stage.setScene(new Scene(root));  
             stage.show();
