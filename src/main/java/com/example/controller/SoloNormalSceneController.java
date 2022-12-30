@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class MainSceneController {
+public class SoloNormalSceneController {
     Modele modele;
     Random rand = new Random();
 

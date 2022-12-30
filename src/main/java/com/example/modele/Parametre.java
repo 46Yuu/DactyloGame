@@ -50,7 +50,7 @@ public class Parametre {
 
         public Builder texteATaper(){
             try {
-                BufferedReader read = new BufferedReader(new FileReader("./src/main/resources/francais200.txt"));
+                BufferedReader read = new BufferedReader(new FileReader("./src/main/resources/txt/francais200.txt"));
                 String ligne = read.readLine();
                 ArrayList<String> listeMots = new ArrayList<String>();
                 while(ligne != null){

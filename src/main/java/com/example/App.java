@@ -13,7 +13,8 @@ import javafx.scene.layout.VBox;
 import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.StyledTextArea;
 
-import com.example.controller.MainSceneController;
+import com.example.controller.ChoixSceneController;
+import com.example.controller.SoloNormalSceneController;
 import com.example.modele.*;
 
 /**
@@ -44,22 +45,27 @@ public class App extends Application
         try {
             System.out.print("");
             
-            //URL url = Paths.get("./src/main/resources/MainScene.fxml").toUri().toURL();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainScene.fxml"));
-            //Parent root = FXMLLoader.load(url);
+            // //URL url = Paths.get("./src/main/resources/MainScene.fxml").toUri().toURL();
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloNormalScene.fxml"));
+            // //Parent root = FXMLLoader.load(url);
+            // Parent root = loader.load();
+            // SoloNormalController controller = loader.getController();
+            // Jeu jeu = new Jeu(creationParametreSoloNormal());
+            // Modele modele = new Modele(jeu);
+            // controller.setModele(modele);
+            // modele.initialize();
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixScene.fxml"));
             Parent root = loader.load();
-            MainSceneController controller = loader.getController();
-            Jeu jeu = new Jeu(creationParametreSoloNormal());
-            Modele modele = new Modele(jeu);
-            controller.setModele(modele);
-            modele.initialize();
+
 
             
             Scene scene = new Scene(root);
             
             
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Test Scene");
+            primaryStage.setTitle("Choix");
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

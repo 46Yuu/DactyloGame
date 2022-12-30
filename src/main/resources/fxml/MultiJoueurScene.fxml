@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="533.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.MainSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="533.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.MultiJoueurSceneController">
    <children>
        <InlineCssTextArea fx:id="ictaArea" layoutX="43.0" layoutY="186.0" onKeyPressed="#areaOnKeyPressed" prefHeight="218.0" prefWidth="615.0" />
    </children>
