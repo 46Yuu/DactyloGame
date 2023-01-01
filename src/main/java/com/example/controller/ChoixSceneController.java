@@ -1,6 +1,8 @@
 package com.example.controller;
 import com.example.modele.Jeu;
+import com.example.modele.JeuSolo;
 import com.example.modele.Modele;
+import com.example.modele.ModeleSolo;
 import com.example.modele.Parametre;
 
 import javafx.event.ActionEvent;
@@ -42,8 +44,8 @@ public class ChoixSceneController {
             // SoloNormalController controller = new SoloNormalController();
             //loader.setController(controller);
             SoloJeuSceneController controller = loader.getController();
-            Jeu jeu = new Jeu(creationParametreSoloNormal());
-            Modele modele = new Modele(jeu);
+            JeuSolo jeu = new JeuSolo(creationParametreSoloNormal());
+            ModeleSolo modele = new ModeleSolo(jeu);
             controller.setModele(modele);
             modele.initialize();
             controller.initializeScene();

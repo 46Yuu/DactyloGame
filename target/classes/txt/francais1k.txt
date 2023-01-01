@@ -54,7 +54,7 @@ animer
 année
 annoncer
 apercevoir
-apparaître
+apparaitre
 apparence
 appartement
 appartenir
@@ -71,7 +71,7 @@ arme
 armée
 armer
 arracher
-arrêter
+arreter
 arrière
 arrivée
 arriver
@@ -125,7 +125,7 @@ beaucoup
 beauté
 beaux
 besoin
-bête
+bete
 bien
 bientot
 billet
@@ -134,7 +134,7 @@ bleu
 blond
 boire
 bois
-boîte
+boite
 bon
 bonheur
 bord
@@ -183,7 +183,7 @@ ces
 cesse
 cesser
 chacun
-chaîne
+chaine
 chair
 chaise
 chaleur
@@ -253,7 +253,7 @@ confiance
 confier
 confondre
 connaissance
-connaître
+connaitre
 conscience
 conseil
 consentir
@@ -367,7 +367,7 @@ diriger
 discours
 discussion
 discuter
-disparaître
+disparaitre
 disposer
 distance
 distinguer
@@ -423,7 +423,7 @@ elle
 embrasser
 emmener
 émotion
-empêcher
+empecher
 empire
 employer
 emporter
@@ -446,7 +446,7 @@ ensuite
 entendre
 entier
 entourer
-entraîner
+entrainer
 entre
 entrée
 entrer
@@ -490,7 +490,7 @@ etc
 étouffer
 étrange
 étranger
-être
+etre
 étroit
 étude
 étudier
@@ -526,11 +526,11 @@ fauteuil
 faux
 faveur
 femme
-fenêtre
+fenetre
 fer
 ferme
 fermer
-fête
+fete
 feu
 feuille
 fidèle
@@ -556,7 +556,7 @@ fond
 fonder
 force
 forcer
-forêt
+foret
 forme
 former
 fort
@@ -635,7 +635,7 @@ idée
 ignorer
 il
 il faut
-île
+ile
 ils
 image
 imaginer
@@ -658,7 +658,7 @@ instinct
 intelligence
 intention
 intéresser
-intérêt
+intéret
 intérieur
 interroger
 interrompre
@@ -737,7 +737,7 @@ maintenant
 maintenir
 mais
 maison
-maître
+maitre
 mal
 malade
 maladie
@@ -762,9 +762,9 @@ mauvais
 me
 médecin
 meilleur
-mêler
+meler
 membre
-même
+meme
 mémoire
 menacer
 mener
@@ -811,7 +811,7 @@ muet
 mur
 musique
 naissance
-naître
+naitre
 nation
 nature
 naturel
@@ -875,7 +875,7 @@ papa
 papier
 paquet
 par
-paraître
+paraitre
 parce que
 parcourir
 pareil
@@ -991,9 +991,9 @@ présenter
 président
 presque
 presser
-prêt
+pret
 prétendre
-prêter
+preter
 preuve
 prévenir
 prévoir
@@ -1062,7 +1062,7 @@ recevoir
 recherche
 réclamer
 recommencer
-reconnaître
+reconnaitre
 recueillir
 reculer
 réduire
@@ -1119,11 +1119,11 @@ retourner
 retrouver
 réunir
 réussir
-rêve
+reve
 réveiller
 révéler
 revenir
-rêver
+rever
 revoir
 révolution
 riche
@@ -1270,7 +1270,7 @@ te
 tel
 tellement
 témoin
-tempête
+tempete
 temps
 tendre
 tenir
@@ -1281,7 +1281,7 @@ terrain
 terre
 terreur
 terrible
-tête
+tete
 théâtre
 tirer
 titre
@@ -1302,7 +1302,7 @@ toute
 trace
 tracer
 train
-traîner
+trainer
 trait
 traiter
 tranquille
@@ -1348,8 +1348,8 @@ verre
 vers
 verser
 vert
-vêtement
-vêtir
+vetement
+vetir
 victime
 vide
 vie

@@ -172,7 +172,6 @@ public class SoloNormalSceneController {
         lblDonneePrecision.setVisible(false);
         lblDonneeRegularite.setVisible(false);
         lblDonneeVitesse.setVisible(false);
-
     }
     
 }

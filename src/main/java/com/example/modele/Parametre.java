@@ -50,7 +50,7 @@ public class Parametre {
 
         public Builder texteATaper(){
             try {
-                BufferedReader read = new BufferedReader(new FileReader("./src/main/resources/txt/francais200.txt"));
+                BufferedReader read = new BufferedReader(new FileReader("./src/main/resources/txt/francais1k.txt"));
                 String ligne = read.readLine();
                 ArrayList<String> listeMots = new ArrayList<String>();
                 while(ligne != null){
@@ -58,7 +58,7 @@ public class Parametre {
                     ligne = read.readLine();
                 }
                 Random rand = new Random();
-                for(int i = 0; i < 50; i++){
+                for(int i = 0; i < 500; i++){
                     texteATaper += listeMots.get(rand.nextInt(listeMots.size()))+" ";
                 }
                 read.close();

@@ -16,7 +16,7 @@ public class Modele {
      * TODO Utiliser une liste de paire d'entier pour savoir quelles position colorier
      */
 
-    private Jeu jeu;
+    protected Jeu jeu;
 
     public Modele(Jeu jeu) {
         this.jeu = jeu;

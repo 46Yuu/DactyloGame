@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.fxmisc.richtext.InlineCssTextArea?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.SoloJeuSceneController">
+   <children>
+       <InlineCssTextArea fx:id="ictaArea" layoutX="12.0" layoutY="29.0" onKeyPressed="#areaOnKeyPressed" prefHeight="315.0" prefWidth="1116.0" />
+      <Label fx:id="lblTexteVie" layoutX="515.0" layoutY="361.0" prefHeight="29.0" prefWidth="98.0" text="VIE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDonneeVie" layoutX="530.0" layoutY="416.0" prefHeight="36.0" prefWidth="53.0">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <Label fx:id="lblTexteVitesse" layoutX="25.0" layoutY="365.0" text="Vitesse">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTexteRegularite" layoutX="25.0" layoutY="406.0" text="Régularité">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTextePrecision" layoutX="25.0" layoutY="451.0" text="Précision">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDonneeVitesse" layoutX="251.0" layoutY="365.0" text="   ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDonneeRegularite" layoutX="251.0" layoutY="406.0" text="   ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDonneePrecision" layoutX="251.0" layoutY="451.0" text="   ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTexteNiveau" layoutX="774.0" layoutY="358.0" text="Niveau">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDonneeNiveau" layoutX="804.0" layoutY="416.0" prefHeight="36.0" prefWidth="63.0" text="   ">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

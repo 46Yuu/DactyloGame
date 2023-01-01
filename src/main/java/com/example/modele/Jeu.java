@@ -6,22 +6,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Jeu {
-    private Parametre parametre;
-    private double charUtiles = 0;
-    private double charUtilesTemporaire = 0;
-    private double nbAppuiTouches = 0;
-    private Timer timer;
-    private int resPourCalculMoyenne = 0;
-    private int tempsEntreChaqueCharUtile = 0;
-    boolean timerActive = false;
-    boolean bonus = false;
+    protected Parametre parametre;
+    protected double charUtiles = 0;
+    protected double charUtilesTemporaire = 0;
+    protected double nbAppuiTouches = 0;
+    protected Timer timer;
+    protected int resPourCalculMoyenne = 0;
+    protected int tempsEntreChaqueCharUtile = 0;
+    protected boolean timerActive = false;
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
 
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
-    private LinkedList<String> file;
-    private LinkedList<String> fileSnd;
+    protected LinkedList<String> file;
+    protected LinkedList<String> fileSnd;
 
     public Jeu(Parametre p) {
         parametre = p;
@@ -56,16 +55,13 @@ public class Jeu {
      */
     public String validerMot(){
         String s = "";
-        if(!file.isEmpty()) file.removeFirst();
-        if(parametre.getMode().compareTo("jeu")==0){
-            if(file.size()<8){
-                s = ajoutMotALaFile();
-            }
-        }
-        else {
-            s = ajoutMotALaFile();
-        }
+        enleverMotEnTeteDeFile();
+        s = ajoutMotALaFile();
         return s;
+    }
+
+    public void enleverMotEnTeteDeFile(){
+        if(!file.isEmpty()) file.removeFirst();
     }
 
     
@@ -73,6 +69,7 @@ public class Jeu {
      * Initialize la file des éléments à taper
      */
     public void initializerFiles(){
+        System.out.println("-----------------------------------------------------------------------");
         file = new LinkedList<String>();
         fileSnd = new LinkedList<String>();
         String[] texteSplit = parametre.getTexteATaper().split(" ");
@@ -135,60 +132,56 @@ public class Jeu {
         tempsEntreChaqueCharUtile = 0;
     }
 
-    public void startTimerNormal(){
+
+    public void startTimerNormal() {
+        startTimerStat();
+        startTimerCompteur();
+    }
+
+    private void getStats(){
+        double mpm = (charUtiles/(0.5))/5;
+        System.out.println("char utiles : "+charUtiles);
+        System.out.println("appuie touches : "+nbAppuiTouches);
+        double precision = (charUtiles/nbAppuiTouches)*100;
+        double ecartType = calculEcartType();
+        System.out.println("----------STATS----------");
+        System.out.println("Vitesse : "+mpm);
+        System.out.println("Précision : "+df.format(precision));
+        System.out.println("Regularité : "+df.format(ecartType));
+        timer.cancel();
+    }
+
+    private void startTimerStat(){
         timerActive = true;
         timer = new Timer();
+        TimerTask task = new TimerTask(){ 
+            @Override
+            public void run(){
+                getStats();
+            }
+        };
+        timer.schedule(task,30*1000); 
+    }
+
+    public void startTimerCompteur(){
         TimerTask taskCounterEcartType = new TimerTask() {
             @Override
             public void run() {
                 tempsEntreChaqueCharUtile++;
             }
         };
-        TimerTask task = new TimerTask(){ 
-            @Override
-            public void run(){
-                double mpm = (charUtiles/(0.5))/5;
-                System.out.println("char utiles : "+charUtiles);
-                System.out.println("appuie touches : "+nbAppuiTouches);
-                double precision = (charUtiles/nbAppuiTouches)*100;
-                double ecartType = calculEcartType();
-                System.out.println("----------STATS----------");
-                System.out.println("Vitesse : "+mpm);
-                System.out.println("Précision : "+df.format(precision));
-                System.out.println("Regularité : "+df.format(ecartType));
-                timer.cancel();
-            }
-        };
         timer.scheduleAtFixedRate(taskCounterEcartType,0*1000, 1*1000);
-        timer.schedule(task,30*1000); 
-    }
-
-    /* 
-     * TimerTask taskCounterEcartType = new TimerTask() {
-            @Override
-            public void run() {
-                if(file.size() == 15){
-                    trouver un moyen de lancer verificationMot(caretPos) d'ici , ou mettre ce timertask+schedule dans mainSceneController
-                }
-                else {
-                    ajoutMotALaFile();
-                }
-            }
-        };
-        timer.scheduleAtFixedRate(taskAjoutMot, 0*1000, vitesse(niveau);
-    */
-    public long vitesse(int niveau){
-        return 3*Math.round(Math.pow((0.9),niveau))*1000;
     }
 
     public Timer getTimer(){
         return this.timer;
     }
+    
     public boolean getTimerActive(){
         return timerActive;
     }
 
-    private double calculEcartType(){
+    protected double calculEcartType(){
         if(charUtiles == 0){
             return 0;
         }
@@ -197,10 +190,5 @@ public class Jeu {
         }
     }
 
-    public boolean getBonus(){
-        return bonus;
-    }
-    public void setBonus(Boolean newBool){
-        bonus = newBool;
-    }
+
 }
