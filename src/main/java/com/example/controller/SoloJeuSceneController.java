@@ -1,14 +1,16 @@
 package com.example.controller;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.TimerTask;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.Caret.CaretVisibility;
 
-import com.example.modele.ModeleSolo;
-import com.example.modele.JeuSolo;
+import com.example.modele.ModeleJeu;
+import com.example.modele.SoloJeu;
 
+import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,13 +18,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
+
 
 public class SoloJeuSceneController extends SoloNormalSceneController{
 
-    ModeleSolo modele;
+    ModeleJeu modele;
     Random rand = new Random();
     Timeline time;
+    private static final int nombreMotPourAugmenterNiveau = 100;
 
    
     @FXML
@@ -72,7 +75,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     }
 
     private void isMotBonus(int caretPos){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         if((ictaArea.getStyleAtPosition(caretPos+1).compareTo("-fx-fill: blue; -fx-font-size: 18px;") == 0) && !jeuSolo.getBonus()){
             jeuSolo.setBonus(true);
             jeuSolo.setBonusActive(true);
@@ -81,7 +84,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
 
     @Override
     protected void verificationMot(int caretPos){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         int erreurs = 0;
         int length = 0;
         int memCaretPos = caretPos;
@@ -141,7 +144,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red; -fx-font-size: 18px;");
             modele.getJeu().incrNbAppuiTouches();
             ictaArea.moveTo(caretPos+1);
-            JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+            SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
             jeuSolo.setBonusActive(false);
             return false;
         }
@@ -154,7 +157,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     @Override
     protected boolean backSpace(int caretPos){
         if(!verificationDebutDuMot(caretPos)){
-            JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+            SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
             ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black; -fx-font-size: 18px;");
             String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
             if(previousCharStyle.compareTo("-fx-fill: green; -fx-font-size: 18px;") == 0){
@@ -178,7 +181,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             newCaretPos++;
         }
         enleverPv(erreurs);
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         jeuSolo.setBonus(false);
         jeuSolo.setBonusActive(false);
         ajoutNouveauMot(newCaretPos);
@@ -193,7 +196,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             newCaretPos++;
         }
         enleverPv(erreurs);
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         jeuSolo.enleverMotEnTeteDeFile();
         jeuSolo.setBonus(false);
         jeuSolo.setBonusActive(false);
@@ -203,19 +206,21 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
 
     private void enleverPv(int erreurs){
         if(erreurs > 0){
-            JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+            SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
             jeuSolo.ajoutPv(-erreurs);
             updateScene();
             if(jeuSolo.getPv()<=0){
+                ictaArea.setDisable(true);
                 jeuSolo.getTimer().cancel();
                 time.stop();
                 jeuSolo.getStats();
+                affichageDonneeFinDeJeu();
             }
         }
     }
 
     private void testBonus(int length){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         if(jeuSolo.getBonusActive()){
             jeuSolo.ajoutPv(length);
             updateScene();
@@ -225,7 +230,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     }
 
     public void startTimerJeu(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         if (!jeuSolo.getTimerActive()){
             jeuSolo.startTimerCompteur();
             startTimerAjoutMot();
@@ -233,14 +238,14 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     }   
     
     public void startTimerAjoutMot(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         time = new Timeline(new KeyFrame(Duration.millis(Long.valueOf(jeuSolo.getVitesse()).doubleValue()),ae ->timerAjoutMot()));
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
     }
 
     private void timerAjoutMot(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         if(jeuSolo.getFile().size() >= 15){
             moveToNextMotSansAjoutNouveauMot(ictaArea.getCaretPosition());
             System.out.println(jeuSolo.getFile().size());
@@ -269,7 +274,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
 
     @Override
     protected void ajoutNouveauMot(int caretPos){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         jeuSolo.resetCharUtilesTemporaire();
         if(jeuSolo.getFile().size()<8){
             String nouveauMot = jeuSolo.validerMot();
@@ -291,7 +296,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
 
     
     protected void ajoutNouveauMotTimer(int caretPos){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         jeuSolo.resetCharUtilesTemporaire();
         String nouveauMot = jeuSolo.ajoutMotALaFile();
         ictaArea.appendText(nouveauMot+" ");
@@ -310,7 +315,7 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
         ictaArea.setStyle(ictaLength-length, ictaLength-1, "-fx-fill: blue; -fx-font-size: 18px;");
     }
 
-    public void setModele(ModeleSolo modele) {
+    public void setModele(ModeleJeu modele) {
         this.modele = modele;
         //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
         modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
@@ -322,14 +327,14 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     }
 
     public void updateScene(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         lblDonneeNiveau.setText(jeuSolo.getNiveau()+"");
         lblDonneeVie.setText(jeuSolo.getPv()+"");
     }
 
     @Override
     public void initializeScene(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         lblTextePrecision.setVisible(false);
         lblTexteRegularite.setVisible(false);
         lblTexteVitesse.setVisible(false);
@@ -342,16 +347,42 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     }
 
     public void execNumMots(){
-        JeuSolo jeuSolo = (JeuSolo)(modele.getJeu());
+        SoloJeu jeuSolo = (SoloJeu)(modele.getJeu());
         int numMots = jeuSolo.getNumMots();
-        jeuSolo.setNumMots(numMots+1);
-        if(numMots==3){
-            jeuSolo.setNumMots(0);
+        jeuSolo.setNumMots(numMots-1);
+        if(numMots==0){
+            //jeuSolo.setNumMots(1);
+            jeuSolo.reinitialiserNumMots();
             jeuSolo.incrNiveau();
             updateScene();
             time.stop();
             startTimerAjoutMot();
         }
+    }
+
+    @Override
+    public void affichageDonneeFinDeJeu(){
+
+        lblTexteVie.setVisible(false);
+        lblDonneeVie.setVisible(false);
+        lblTexteNiveau.setVisible(false);
+        lblDonneeNiveau.setVisible(false);
+        
+        lblTextePrecision.setVisible(true);
+        lblTexteRegularite.setVisible(true);
+        lblTexteVitesse.setVisible(true);
+        lblDonneePrecision.setVisible(true);
+        lblDonneeRegularite.setVisible(true);
+        lblDonneeVitesse.setVisible(true);
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        lblDonneePrecision.setText(df.format(modele.getJeu().getStatsPrecision())+"");
+        lblDonneeRegularite.setText(df.format(modele.getJeu().getStatsRegularite())+"");
+        lblDonneeVitesse.setText(df.format(modele.getJeu().getStatsVitesse())+"");
+        
+
+        
+
     }
 
 

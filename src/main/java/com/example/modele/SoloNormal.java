@@ -5,7 +5,8 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Jeu {
+public class SoloNormal {
+
     protected Parametre parametre;
     protected double charUtiles = 0;
     protected double charUtilesTemporaire = 0;
@@ -17,14 +18,20 @@ public class Jeu {
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
+    private int tempsJeu = 30;
 
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
     protected LinkedList<String> file;
     protected LinkedList<String> fileSnd;
 
-    public Jeu(Parametre p) {
+    public SoloNormal(Parametre p) {
         parametre = p;
         this.initializerFiles();
+    }
+
+
+    public int getTempsJeu(){
+        return tempsJeu;
     }
 
     /*
@@ -151,6 +158,18 @@ public class Jeu {
         timer.cancel();
     }
 
+    public double getStatsVitesse(){
+        return (charUtiles/(0.5))/5;
+    }
+
+    public double getStatsPrecision(){
+        return (charUtiles/nbAppuiTouches)*100;
+    }
+
+    public double getStatsRegularite(){
+        return calculEcartType();
+    }
+
     private void startTimerStat(){
         timerActive = true;
         timer = new Timer();
@@ -173,6 +192,14 @@ public class Jeu {
         timer.scheduleAtFixedRate(taskCounterEcartType,0*1000, 1*1000);
     }
 
+    public void decrCountdown(){
+        tempsJeu--;
+    }
+
+    public int getCountdown(){
+        return tempsJeu;
+    }
+
     public Timer getTimer(){
         return this.timer;
     }
@@ -189,6 +216,12 @@ public class Jeu {
             return resPourCalculMoyenne/charUtiles;
         }
     }
+
+    public double getCharUtiles() {
+        return charUtiles;
+    }
+
+
 
 
 }

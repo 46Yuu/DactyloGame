@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.modele.Jeu;
+import com.example.modele.SoloNormal;
 import com.example.modele.Parametre;
 
 /**
@@ -57,7 +57,7 @@ public class AppTest
 
     @Test
     public void testInitialisationJeu(){
-        Jeu jeu = new Jeu(creationParametreSoloNormal());
+        SoloNormal jeu = new SoloNormal(creationParametreSoloNormal());
         jeu.initializerFiles();
         System.out.println("Voici la liste secondaire");
         afficherListe(jeu.getFileSnd());
@@ -81,7 +81,7 @@ public class AppTest
      */
     @Test
     public void testValidationMot(){
-        Jeu jeu = new Jeu(creationParametreSoloNormal());
+        SoloNormal jeu = new SoloNormal(creationParametreSoloNormal());
         jeu.initializerFiles();
         //System.out.println("-----Validation du premier mot");
         jeu.validerMot();

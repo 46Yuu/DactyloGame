@@ -1,8 +1,8 @@
 package com.example.controller;
-import com.example.modele.Jeu;
-import com.example.modele.JeuSolo;
-import com.example.modele.Modele;
-import com.example.modele.ModeleSolo;
+import com.example.modele.SoloNormal;
+import com.example.modele.SoloJeu;
+import com.example.modele.ModeleNormal;
+import com.example.modele.ModeleJeu;
 import com.example.modele.Parametre;
 
 import javafx.event.ActionEvent;
@@ -44,12 +44,12 @@ public class ChoixSceneController {
             // SoloNormalController controller = new SoloNormalController();
             //loader.setController(controller);
             SoloJeuSceneController controller = loader.getController();
-            JeuSolo jeu = new JeuSolo(creationParametreSoloNormal());
-            ModeleSolo modele = new ModeleSolo(jeu);
+            SoloJeu jeu = new SoloJeu(creationParametreSoloNormal());
+            ModeleJeu modele = new ModeleJeu(jeu);
             controller.setModele(modele);
             modele.initialize();
             controller.initializeScene();
-            
+                    
 
             stage.setScene(new Scene(root));  
             stage.show();
@@ -72,11 +72,12 @@ public class ChoixSceneController {
             // SoloNormalController controller = new SoloNormalController();
             //loader.setController(controller);
             SoloNormalSceneController controller = loader.getController();
-            Jeu jeu = new Jeu(creationParametreSoloNormal());
-            Modele modele = new Modele(jeu);
+            SoloNormal jeu = new SoloNormal(creationParametreSoloNormal());
+            ModeleNormal modele = new ModeleNormal(jeu);
             controller.setModele(modele);
             modele.initialize();
             controller.initializeScene();
+
 
             stage.setScene(new Scene(root));  
             stage.show();

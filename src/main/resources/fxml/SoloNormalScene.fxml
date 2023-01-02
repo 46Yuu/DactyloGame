@@ -13,7 +13,11 @@
             <Font size="34.0" />
          </font>
       </Label>
-      <Label fx:id="lblDonneeTime" layoutX="530.0" layoutY="416.0" prefHeight="36.0" prefWidth="53.0" />
+      <Label fx:id="lblDonneeTime" layoutX="530.0" layoutY="416.0" prefHeight="36.0" prefWidth="53.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
       <Label fx:id="lblTexteVitesse" layoutX="25.0" layoutY="365.0" text="Vitesse">
          <font>
             <Font size="22.0" />

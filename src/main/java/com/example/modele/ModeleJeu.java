@@ -1,12 +1,9 @@
 package com.example.modele;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class ModeleSolo extends Modele{
+public class ModeleJeu extends ModeleNormal{
 
     //private JeuSolo jeu;
-    public ModeleSolo(JeuSolo jeu) {
+    public ModeleJeu(SoloJeu jeu) {
         super(jeu);
     }
 

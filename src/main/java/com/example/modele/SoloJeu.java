@@ -5,21 +5,25 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class JeuSolo extends Jeu{
+public class SoloJeu extends SoloNormal{
 
 
     protected boolean bonus = false;
     protected boolean bonusActive = false;
-
+    public static final int nombreDeMotPourChangerDeNiveau = 1;
     protected int pv = 50;
     protected int niveau = 1;
-    protected int numMots = 0;
+    protected int numMots;
 
-    public JeuSolo(Parametre p) {
+    public SoloJeu(Parametre p) {
         super(p);
+        reinitialiserNumMots();
         this.initializerFiles();
     }
     
+    public void reinitialiserNumMots(){
+        numMots = nombreDeMotPourChangerDeNiveau;
+    }
     @Override
     public String validerMot(){
         String s = "";
@@ -117,6 +121,10 @@ public class JeuSolo extends Jeu{
 
     public void ajoutPv(int val){
         pv+=val;
+    }
+
+    public static int getNombredemotpourchangerdeniveau() {
+        return nombreDeMotPourChangerDeNiveau;
     }
 
 }

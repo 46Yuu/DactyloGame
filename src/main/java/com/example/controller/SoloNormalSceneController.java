@@ -1,16 +1,18 @@
 package com.example.controller;
 
+import java.text.DecimalFormat;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.Caret.CaretVisibility;
-import org.fxmisc.richtext.NavigationActions.SelectionPolicy;
 
-import com.example.modele.Modele;
+import com.example.modele.SoloNormal;
+import com.example.modele.ModeleNormal;
+
+import javafx.util.Duration;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +21,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class SoloNormalSceneController {
-    Modele modele;
+    ModeleNormal modele;
     Random rand = new Random();
+    Timeline time;
 
     @FXML
     protected InlineCssTextArea ictaArea;
@@ -78,11 +81,37 @@ public class SoloNormalSceneController {
         }
     }
 
+    // public void startTimerCountTime(){
+    //     TimerTask taskCountTime = new TimerTask() {
+    //         @Override
+    //         public void run() {
+    //             lblDonneeTime.setText(tempsJeu+"");
+    //             tempsJeu --;
+    //         }
+    //     };
+    //     modele.getJeu().getTimer().scheduleAtFixedRate(taskCountTime,0*1000, 1*1000);
+    // }
+
+    // public void enleverUneSecondeDeLAffichage(){
+    //     tempsJeu --;
+    //     System.out.println("******************************************************************************************");
+    //     lblDonneeTime.setText(tempsJeu+"");
+    // }
+
+    // public void updateTempsDeJeuRestant(int temps){
+    //     lblDonneeTime.setText(temps+"");
+
+    // }
 
     private void startTimer(){
         if (!modele.getJeu().getTimerActive()){
             modele.getJeu().startTimerNormal();
-            //showtimer
+            lblTexteTime.setVisible(true);
+            lblDonneeTime.setVisible(true);
+            updateTimer();
+            //startTimerCountTime();
+            
+            //lblDonneeTime.setText(tempsJeu+"");
         }
     }
 
@@ -125,7 +154,6 @@ public class SoloNormalSceneController {
         else {
             return true;
         }
-       
     }
 
     protected void verificationMot(int caretPos){
@@ -180,7 +208,25 @@ public class SoloNormalSceneController {
         ictaArea.moveTo(caretPos+1);
     }
 
-    public void setModele(Modele modele) {
+    protected void updateTimer(){
+        time = new Timeline(new KeyFrame(Duration.millis(1000),ae ->updateCountdown()));
+        time.setCycleCount(Animation.INDEFINITE);
+        time.play();
+    }
+
+    protected void updateCountdown(){
+        if(modele.getJeu().getCountdown()>0){
+            modele.getJeu().decrCountdown();
+            lblDonneeTime.setText(modele.getJeu().getCountdown()+"");   
+        }
+        else {
+            time.stop();
+            //afficher stats
+            affichageDonneeFinDeJeu();
+        }
+    }
+
+    public void setModele(ModeleNormal modele) {
         this.modele = modele;
         //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
         modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
@@ -200,6 +246,27 @@ public class SoloNormalSceneController {
         lblDonneePrecision.setVisible(false);
         lblDonneeRegularite.setVisible(false);
         lblDonneeVitesse.setVisible(false);
+    }
+
+    public void affichageDonneeFinDeJeu(){
+        ictaArea.setDisable(true);
+        lblTexteTime.setVisible(false);
+        lblDonneeTime.setVisible(false);
+        lblTextePrecision.setVisible(true);
+        lblTexteRegularite.setVisible(true);
+        lblTexteVitesse.setVisible(true);
+        lblDonneePrecision.setVisible(true);
+        lblDonneeRegularite.setVisible(true);
+        lblDonneeVitesse.setVisible(true);
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        lblDonneePrecision.setText(df.format(modele.getJeu().getStatsPrecision())+"");
+        lblDonneeRegularite.setText(df.format(modele.getJeu().getStatsRegularite())+"");
+        lblDonneeVitesse.setText(df.format(modele.getJeu().getStatsVitesse())+"");
+        
+
+        
+
     }
     
 }

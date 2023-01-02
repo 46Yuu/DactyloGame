@@ -1,20 +1,12 @@
-package com.example;
-import java.net.URL;
-import java.nio.file.Paths;
-
+package com.example.vue;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 
-import org.fxmisc.richtext.StyleClassedTextArea;
-import org.fxmisc.richtext.StyledTextArea;
 
-import com.example.controller.ChoixSceneController;
-import com.example.controller.SoloNormalSceneController;
 import com.example.modele.*;
 
 /**

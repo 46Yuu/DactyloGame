@@ -15,7 +15,7 @@
       </Label>
       <Label fx:id="lblDonneeVie" layoutX="530.0" layoutY="416.0" prefHeight="36.0" prefWidth="53.0">
          <font>
-            <Font size="30.0" />
+            <Font size="22.0" />
          </font></Label>
       <Label fx:id="lblTexteVitesse" layoutX="25.0" layoutY="365.0" text="Vitesse">
          <font>
@@ -54,7 +54,7 @@
       </Label>
       <Label fx:id="lblDonneeNiveau" layoutX="804.0" layoutY="416.0" prefHeight="36.0" prefWidth="63.0" text="   ">
          <font>
-            <Font size="30.0" />
+            <Font size="22.0" />
          </font>
       </Label>
    </children>

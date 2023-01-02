@@ -3,27 +3,27 @@ package com.example.modele;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.example.vue.*;
-
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 
-
-public class Modele {
+public class ModeleNormal {
 
     /**
      * TODO Utiliser une liste de paire d'entier pour savoir quelles position colorier
      */
 
-    protected Jeu jeu;
+    protected SoloNormal jeu;
 
-    public Modele(Jeu jeu) {
+    
+
+    public ModeleNormal(SoloNormal jeu) {
         this.jeu = jeu;
     }
 
+
+
+
     public interface Listener {
-        void onChange(Modele modele);
+        void onChange(ModeleNormal modele);
     }
 
     private List<Listener> listeners = new LinkedList<Listener>();
@@ -56,7 +56,7 @@ public class Modele {
         listeners.stream().forEach(l -> l.onChange(this));
     }
 
-    public Jeu getJeu(){
+    public SoloNormal getJeu(){
         return jeu;
     }
 }
