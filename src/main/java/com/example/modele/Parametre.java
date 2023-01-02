@@ -58,7 +58,7 @@ public class Parametre {
                     ligne = read.readLine();
                 }
                 Random rand = new Random();
-                for(int i = 0; i < 500; i++){
+                for(int i = 0; i < listeMots.size(); i++){
                     texteATaper += listeMots.get(rand.nextInt(listeMots.size()))+" ";
                 }
                 read.close();

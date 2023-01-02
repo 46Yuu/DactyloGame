@@ -59,16 +59,22 @@ public class SoloNormalSceneController {
             verificationMot(caretPos);
         }
         else if(charTyped.compareTo(ictaArea.getText(caretPos, caretPos+1)) == 0){
-            charCorrecte(caretPos);
+            if(charCorrecte(caretPos)){
+                event.consume();
+            }
         }
         else if(event.getCode() == KeyCode.BACK_SPACE){
-            backSpace(caretPos);
+            if(backSpace(caretPos)){
+                event.consume();
+            }
         }
         else if(!event.getCode().isLetterKey()){
             event.consume();
         }
         else{
-            charIncorrecte(caretPos);
+            if(charIncorrecte(caretPos)){
+                event.consume();
+            }
         }
     }
 
@@ -80,27 +86,46 @@ public class SoloNormalSceneController {
         }
     }
 
-    protected void charCorrecte(int caretPos){
-        ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green; -fx-font-size: 18px;");
-        modele.getJeu().incrCharUtilesTemporaire();
-        modele.getJeu().incrNbAppuiTouches();
-        modele.getJeu().ajoutTempsCharUtile();
-        ictaArea.moveTo(caretPos+1);
-    }
-
-    protected void charIncorrecte(int caretPos){
-        ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red; -fx-font-size: 18px;");
-        modele.getJeu().incrNbAppuiTouches();
-        ictaArea.moveTo(caretPos+1);
-    }
-
-    protected void backSpace(int caretPos){
-        ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black; -fx-font-size: 18px;");
-        String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
-        if(previousCharStyle.compareTo("-fx-fill: green; -fx-font-size: 18px;") == 0){
-            modele.getJeu().decrCharUtilesTemporaire();
+    protected boolean charCorrecte(int caretPos){
+        if(!verificationFinDuMot(caretPos)){
+            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green; -fx-font-size: 18px;");
+            modele.getJeu().incrCharUtilesTemporaire();
+            modele.getJeu().incrNbAppuiTouches();
+            modele.getJeu().ajoutTempsCharUtile();
+            ictaArea.moveTo(caretPos+1);
+            return false;
         }
-        ictaArea.moveTo(caretPos-1);
+        else {
+            return true;
+        }
+    }
+
+    protected boolean charIncorrecte(int caretPos){
+        if(!verificationFinDuMot(caretPos)){
+            ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red; -fx-font-size: 18px;");
+            modele.getJeu().incrNbAppuiTouches();
+            ictaArea.moveTo(caretPos+1);
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    protected boolean backSpace(int caretPos){
+        if(!verificationDebutDuMot(caretPos)){
+            ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black; -fx-font-size: 18px;");
+            String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
+            if(previousCharStyle.compareTo("-fx-fill: green; -fx-font-size: 18px;") == 0){
+                modele.getJeu().decrCharUtilesTemporaire();
+            }
+            ictaArea.moveTo(caretPos-1);
+            return false;
+        }
+        else {
+            return true;
+        }
+       
     }
 
     protected void verificationMot(int caretPos){
@@ -134,11 +159,14 @@ public class SoloNormalSceneController {
         return ictaArea.getText(caretPos,caretPos+1).compareTo(" ") == 0;
     }
 
+    protected boolean verificationDebutDuMot(int caretPos){
+        return ictaArea.getText(caretPos-1,caretPos).compareTo(" ") == 0;
+    }
+
     protected void moveToNextMot(int caretPos){
         int newCaretPos = caretPos;
         while(!verificationFinDuMot(newCaretPos)){
             ictaArea.setStyle(newCaretPos, newCaretPos+1, "-fx-underline: true; -fx-fill: red; -fx-font-size: 18px;");
-            modele.getJeu().incrNbAppuiTouches();
             newCaretPos++;
         }
         ajoutNouveauMot(newCaretPos);

@@ -138,7 +138,7 @@ public class Jeu {
         startTimerCompteur();
     }
 
-    private void getStats(){
+    public void getStats(){
         double mpm = (charUtiles/(0.5))/5;
         System.out.println("char utiles : "+charUtiles);
         System.out.println("appuie touches : "+nbAppuiTouches);

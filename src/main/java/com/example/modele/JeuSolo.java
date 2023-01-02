@@ -23,7 +23,6 @@ public class JeuSolo extends Jeu{
     @Override
     public String validerMot(){
         String s = "";
-        System.out.println(fileSnd);
         if(!file.isEmpty()) file.removeFirst();
         s = ajoutMotALaFile();
         return s;
@@ -38,15 +37,16 @@ public class JeuSolo extends Jeu{
     }
 
     public long getVitesse(){
-        return 3*Math.round(Math.pow((0.9),niveau))*1000;
-        // switch(niveau){
-        //     case 1: 
-        //         return 1000;
-        //     case 2:
-        //         return 500;
-        //     default:
-        //         return 1000*(1/niveau);
-        // }
+        return 3*Math.round((Math.pow((0.9),niveau))*1000);
+        //return 3*Math.round(Math.pow((0.5),niveau))*1000;
+        /*     switch(niveau){
+            case 1: 
+                return 1000;
+            case 2:
+                return 500;
+            default:
+                return 1000*(1/niveau);
+        }*/
     }
 
     public boolean getBonus(){

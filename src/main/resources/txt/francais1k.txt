@@ -23,8 +23,8 @@ adresser
 affaire
 affirmer
 afin
-âge
-âgé
+age
+agé
 agent
 agir
 agiter
@@ -40,7 +40,7 @@ ajouter
 aller
 allumer
 alors
-âme
+ame
 amener
 ami
 amour
@@ -145,7 +145,7 @@ bras
 briller
 briser
 bruit
-brûler
+bruler
 brusquement
 bureau
 but
@@ -286,7 +286,7 @@ courir
 cours
 course
 court
-coûter
+couter
 couvrir
 craindre
 crainte
@@ -590,10 +590,10 @@ geste
 glace
 glisser
 gloire
-goût
+gout
 goutte
 gouvernement
-grâce
+grace
 grain
 grand
 grandir
@@ -608,7 +608,7 @@ habitant
 habiter
 habitude
 haine
-haïr
+hair
 hasard
 haut
 haute
@@ -1251,14 +1251,14 @@ supérieur
 supporter
 supposer
 sur
-sûr
+sur
 surprendre
 surtout
 surveiller
 système
 table
 tache
-tâche
+tache
 taille
 taire
 tandis que
@@ -1282,7 +1282,7 @@ terre
 terreur
 terrible
 tete
-théâtre
+théatre
 tirer
 titre
 toi
