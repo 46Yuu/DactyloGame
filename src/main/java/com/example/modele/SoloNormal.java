@@ -18,7 +18,7 @@ public class SoloNormal {
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
-    private int tempsJeu = 30;
+    private int tempsJeu = 29;
 
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
     protected LinkedList<String> file;
