@@ -145,8 +145,9 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     protected boolean charIncorrecte(int caretPos){
         if(!verificationFinDuMot(caretPos)){
             ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red; -fx-font-size: 18px;");
-            jeu.incrNbAppuiTouches();
+
             ictaArea.moveTo(caretPos+1);
+            jeu.incrNbAppuiTouches();
             PartieSoloJeu jeuSolo = (PartieSoloJeu)(jeu);
             jeuSolo.setBonusActive(false);
             return false;
@@ -259,21 +260,6 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             ictaArea.moveTo(ictaArea.getCaretPosition()-1);
         }
     }
-    /* 
-    public void startTimerAjoutMot(){
-        taskAjoutMot = new TimerTask() {
-            @Override
-            public void run() {
-                if(jeu.getFile().size() == 15){
-                    verificationMot(ictaArea.getCaretPosition());
-                }
-                else {
-                    jeu.ajoutMotALaFile();
-                }
-            }
-        };
-        jeu.getTimer().scheduleAtFixedRate(taskAjoutMot, 0*1000, jeu.getVitesse());
-    }*/
 
     @Override
     protected void ajoutNouveauMot(int caretPos){
@@ -300,7 +286,9 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
     
     protected void ajoutNouveauMotTimer(int caretPos){
         PartieSoloJeu jeuSolo = (PartieSoloJeu)(jeu);
-        jeuSolo.resetCharUtilesTemporaire();
+        //A voir
+        //jeuSolo.resetCharUtilesTemporaire();
+
         String nouveauMot = jeuSolo.ajoutMotALaFile();
         ictaArea.appendText(nouveauMot+" ");
         ictaArea.setStyle(ictaArea.getLength()-nouveauMot.length()-1, ictaArea.getLength(), "-fx-font-size: 18px;");
