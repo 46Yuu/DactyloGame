@@ -2,10 +2,11 @@ package com.example.modele;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SoloNormal {
+public class PartieSoloNormal {
 
     protected Parametre parametre;
     protected double charUtiles = 0;
@@ -24,7 +25,7 @@ public class SoloNormal {
     protected LinkedList<String> file;
     protected LinkedList<String> fileSnd;
 
-    public SoloNormal(Parametre p) {
+    public PartieSoloNormal(Parametre p) {
         parametre = p;
         this.initializerFiles();
     }
@@ -221,6 +222,40 @@ public class SoloNormal {
         return charUtiles;
     }
 
+
+    public interface Listener {
+        void onChange(PartieSoloNormal partieSoloNormal);
+    }
+
+    private List<Listener> listeners = new LinkedList<Listener>();
+    private String beginningText;
+
+
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
+
+    public String getBeginningText() {
+        return beginningText;
+    }
+
+    public void setBeginningText(String beginningText) {
+        this.beginningText = beginningText;
+        notifyObservers();
+    }
+
+    public void initialize(){
+        setBeginningText(getStringOfFile());
+
+        notifyObservers();
+    }
+
+    /**
+     * Permet d'envoyer l'info de la modification du texte à tous les listeners du modele
+     */
+    private void notifyObservers() {
+        listeners.stream().forEach(l -> l.onChange(this));
+    }
 
 
 

@@ -1,8 +1,9 @@
 package com.example.controller;
-import com.example.modele.SoloNormal;
-import com.example.modele.SoloJeu;
-import com.example.modele.ModeleNormal;
-import com.example.modele.ModeleJeu;
+import com.example.modele.PartieSoloNormal;
+import com.example.vue.GenerateurVue;
+import com.example.vue.Vue;
+import com.example.modele.PartieSoloJeu;
+
 import com.example.modele.Parametre;
 
 import javafx.event.ActionEvent;
@@ -33,57 +34,18 @@ public class ChoixSceneController {
 
     @FXML
     void btnSoloJeuClicked(ActionEvent event) {
-        System.out.println("Mode solo Normal Clicked");
-        try {
-            Stage stage = new Stage();
-
-            //URL url = Paths.get("./src/main/resources/MainScene.fxml").toUri().toURL();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloJeuScene.fxml"));
-            //Parent root = FXMLLoader.load(url);
-            Parent root = loader.load();
-            // SoloNormalController controller = new SoloNormalController();
-            //loader.setController(controller);
-            SoloJeuSceneController controller = loader.getController();
-            SoloJeu jeu = new SoloJeu(creationParametreSoloNormal());
-            ModeleJeu modele = new ModeleJeu(jeu);
-            controller.setModele(modele);
-            modele.initialize();
-            controller.initializeScene();
-                    
-
-            stage.setScene(new Scene(root));  
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("Mode solo Jeu Clicked");
+        Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu();
+        vuePartieSoloJeu.lancerVue();
+        
 
     }
 
     @FXML
     void btnSoloNormalClicked(ActionEvent event) {
         System.out.println("Mode solo Normal Clicked");
-        try {
-            Stage stage = new Stage();
-
-            //URL url = Paths.get("./src/main/resources/MainScene.fxml").toUri().toURL();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloNormalScene.fxml"));
-            //Parent root = FXMLLoader.load(url);
-            Parent root = loader.load();
-            // SoloNormalController controller = new SoloNormalController();
-            //loader.setController(controller);
-            SoloNormalSceneController controller = loader.getController();
-            SoloNormal jeu = new SoloNormal(creationParametreSoloNormal());
-            ModeleNormal modele = new ModeleNormal(jeu);
-            controller.setModele(modele);
-            modele.initialize();
-            controller.initializeScene();
-
-
-            stage.setScene(new Scene(root));  
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        Vue vuePartieSoloNormal = GenerateurVue.genererVuePartieSoloNormal();
+        vuePartieSoloNormal.lancerVue();
 
     }
 

@@ -6,8 +6,8 @@ import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.Caret.CaretVisibility;
 
-import com.example.modele.SoloNormal;
-import com.example.modele.ModeleNormal;
+import com.example.modele.PartieSoloNormal;
+
 
 import javafx.util.Duration;
 import javafx.animation.Animation;
@@ -21,9 +21,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class SoloNormalSceneController {
-    ModeleNormal modele;
+    //ModeleNormal modele;
     Random rand = new Random();
     Timeline time;
+    protected PartieSoloNormal jeu;
 
     @FXML
     protected InlineCssTextArea ictaArea;
@@ -89,7 +90,7 @@ public class SoloNormalSceneController {
     //             tempsJeu --;
     //         }
     //     };
-    //     modele.getJeu().getTimer().scheduleAtFixedRate(taskCountTime,0*1000, 1*1000);
+    //     jeu.getTimer().scheduleAtFixedRate(taskCountTime,0*1000, 1*1000);
     // }
 
     // public void enleverUneSecondeDeLAffichage(){
@@ -104,8 +105,8 @@ public class SoloNormalSceneController {
     // }
 
     private void startTimer(){
-        if (!modele.getJeu().getTimerActive()){
-            modele.getJeu().startTimerNormal();
+        if (!jeu.getTimerActive()){
+            jeu.startTimerNormal();
             lblTexteTime.setVisible(true);
             lblDonneeTime.setVisible(true);
             updateTimer();
@@ -118,9 +119,9 @@ public class SoloNormalSceneController {
     protected boolean charCorrecte(int caretPos){
         if(!verificationFinDuMot(caretPos)){
             ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: green; -fx-font-size: 18px;");
-            modele.getJeu().incrCharUtilesTemporaire();
-            modele.getJeu().incrNbAppuiTouches();
-            modele.getJeu().ajoutTempsCharUtile();
+            jeu.incrCharUtilesTemporaire();
+            jeu.incrNbAppuiTouches();
+            jeu.ajoutTempsCharUtile();
             ictaArea.moveTo(caretPos+1);
             return false;
         }
@@ -132,7 +133,7 @@ public class SoloNormalSceneController {
     protected boolean charIncorrecte(int caretPos){
         if(!verificationFinDuMot(caretPos)){
             ictaArea.setStyle(caretPos, caretPos+1, "-fx-fill: red; -fx-font-size: 18px;");
-            modele.getJeu().incrNbAppuiTouches();
+            jeu.incrNbAppuiTouches();
             ictaArea.moveTo(caretPos+1);
             return false;
         }
@@ -146,7 +147,7 @@ public class SoloNormalSceneController {
             ictaArea.setStyle(caretPos-1, caretPos, "-fx-fill: black; -fx-font-size: 18px;");
             String previousCharStyle = ictaArea.getStyleAtPosition(caretPos);
             if(previousCharStyle.compareTo("-fx-fill: green; -fx-font-size: 18px;") == 0){
-                modele.getJeu().decrCharUtilesTemporaire();
+                jeu.decrCharUtilesTemporaire();
             }
             ictaArea.moveTo(caretPos-1);
             return false;
@@ -177,7 +178,7 @@ public class SoloNormalSceneController {
                 caretPos--;
             }
             if(motCorrecte){
-                modele.getJeu().ajoutCharUtilesTemporaire();
+                jeu.ajoutCharUtilesTemporaire();
             }
             ajoutNouveauMot(memCaretPos);
         }
@@ -201,8 +202,8 @@ public class SoloNormalSceneController {
     }
 
     protected void ajoutNouveauMot(int caretPos){
-        modele.getJeu().resetCharUtilesTemporaire();
-        String nouveauMot = modele.getJeu().validerMot();
+        jeu.resetCharUtilesTemporaire();
+        String nouveauMot = jeu.validerMot();
         ictaArea.appendText(nouveauMot+" ");
         ictaArea.setStyle(ictaArea.getLength()-nouveauMot.length(), ictaArea.getLength()-1, "-fx-font-size: 18px;");
         ictaArea.moveTo(caretPos+1);
@@ -215,9 +216,9 @@ public class SoloNormalSceneController {
     }
 
     protected void updateCountdown(){
-        if(modele.getJeu().getCountdown()>0){
-            modele.getJeu().decrCountdown();
-            lblDonneeTime.setText(modele.getJeu().getCountdown()+"");   
+        if(jeu.getCountdown()>0){
+            jeu.decrCountdown();
+            lblDonneeTime.setText(jeu.getCountdown()+"");   
         }
         else {
             time.stop();
@@ -226,16 +227,16 @@ public class SoloNormalSceneController {
         }
     }
 
-    public void setModele(ModeleNormal modele) {
-        this.modele = modele;
-        //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
-        modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
-            ictaArea.moveTo(1);
-            ictaArea.setWrapText(true);
-            ictaArea.setEditable(false);
-            ictaArea.setShowCaret(CaretVisibility.ON);
-            ictaArea.setStyle(0,ictaArea.getLength(),"-fx-font-size: 18px;");});
-    }
+    // public void setModele(ModeleNormal modele) {
+    //     this.modele = modele;
+    //     //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
+    //     modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
+    //         ictaArea.moveTo(1);
+    //         ictaArea.setWrapText(true);
+    //         ictaArea.setEditable(false);
+    //         ictaArea.setShowCaret(CaretVisibility.ON);
+    //         ictaArea.setStyle(0,ictaArea.getLength(),"-fx-font-size: 18px;");});
+    // }
 
     public void initializeScene(){
         lblTexteTime.setVisible(false);
@@ -260,13 +261,26 @@ public class SoloNormalSceneController {
         lblDonneeVitesse.setVisible(true);
 
         DecimalFormat df = new DecimalFormat("0.00");
-        lblDonneePrecision.setText(df.format(modele.getJeu().getStatsPrecision())+"");
-        lblDonneeRegularite.setText(df.format(modele.getJeu().getStatsRegularite())+"");
-        lblDonneeVitesse.setText(df.format(modele.getJeu().getStatsVitesse())+"");
+        lblDonneePrecision.setText(df.format(jeu.getStatsPrecision())+"");
+        lblDonneeRegularite.setText(df.format(jeu.getStatsRegularite())+"");
+        lblDonneeVitesse.setText(df.format(jeu.getStatsVitesse())+"");
         
 
         
 
+    }
+
+
+    public void setJeu(PartieSoloNormal jeu) {
+        System.out.println("Voici donc le bon set ------------------------------");
+        this.jeu = jeu;
+        //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
+        jeu.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
+            ictaArea.moveTo(1);
+            ictaArea.setWrapText(true);
+            ictaArea.setEditable(false);
+            ictaArea.setShowCaret(CaretVisibility.ON);
+            ictaArea.setStyle(0,ictaArea.getLength(),"-fx-font-size: 18px;");});
     }
     
 }

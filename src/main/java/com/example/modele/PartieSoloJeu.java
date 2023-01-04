@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SoloJeu extends SoloNormal{
+public class PartieSoloJeu extends PartieSoloNormal{
 
 
     protected boolean bonus = false;
@@ -15,7 +15,7 @@ public class SoloJeu extends SoloNormal{
     protected int niveau = 1;
     protected int numMots;
 
-    public SoloJeu(Parametre p) {
+    public PartieSoloJeu(Parametre p) {
         super(p);
         reinitialiserNumMots();
         this.initializerFiles();
