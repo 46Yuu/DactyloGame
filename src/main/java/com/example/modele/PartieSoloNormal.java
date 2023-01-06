@@ -7,7 +7,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PartieSoloNormal {
-
     protected Parametre parametre;
     protected double charUtiles = 0;
     protected double charUtilesTemporaire = 0;
@@ -19,18 +18,19 @@ public class PartieSoloNormal {
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
-    private int tempsJeu = 29;
-
+    private int tempsJeu = parametre.getLimiteDeTemps()-1;
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
     protected LinkedList<String> file;
     protected LinkedList<String> fileSnd;
+
+    private List<Listener> listeners = new LinkedList<Listener>();
+    private String beginningText;
 
     public PartieSoloNormal(Parametre p) {
         parametre = p;
         this.initializerFiles();
     }
-
-
+    
     public int getTempsJeu(){
         return tempsJeu;
     }
@@ -47,14 +47,12 @@ public class PartieSoloNormal {
      */
     public String ajoutMotALaFile(){
         //On enleve le premier élement de la fileTemp qu'on ajoute à la fin de la file
-        if(!fileSnd.isEmpty())
-        {
+        if(!fileSnd.isEmpty()){
             String s = fileSnd.removeFirst();
             file.add(s);
             return s;
         }
         return "";
-
     }
 
     /*
@@ -71,7 +69,6 @@ public class PartieSoloNormal {
     public void enleverMotEnTeteDeFile(){
         if(!file.isEmpty()) file.removeFirst();
     }
-
     
     /*
      * Initialize la file des éléments à taper
@@ -81,17 +78,11 @@ public class PartieSoloNormal {
         file = new LinkedList<String>();
         fileSnd = new LinkedList<String>();
         String[] texteSplit = parametre.getTexteATaper().split(" ");
-        for (int i=0; i < texteSplit.length; i++)
-        {
-            //System.out.println(texteSplit[i]);
+        for (int i=0; i < texteSplit.length; i++){
             fileSnd.add(texteSplit[i]);
         }
-
-
         //Ensuite on envoie les 15 premiers mots dans la file principale
-        for (int i=0; i < 15; i++)
-        {
-            //System.out.println(texteSplit[i]);
+        for (int i=0; i < 15; i++){
             ajoutMotALaFile();
         }
     }
@@ -180,7 +171,7 @@ public class PartieSoloNormal {
                 getStats();
             }
         };
-        timer.schedule(task,30*1000); 
+        timer.schedule(task,parametre.getLimiteDeTemps()*1000); 
     }
 
     public void startTimerCompteur(){
@@ -227,10 +218,6 @@ public class PartieSoloNormal {
         void onChange(PartieSoloNormal partieSoloNormal);
     }
 
-    private List<Listener> listeners = new LinkedList<Listener>();
-    private String beginningText;
-
-
     public void addListener(Listener listener) {
         listeners.add(listener);
     }
@@ -246,7 +233,6 @@ public class PartieSoloNormal {
 
     public void initialize(){
         setBeginningText(getStringOfFile());
-
         notifyObservers();
     }
 

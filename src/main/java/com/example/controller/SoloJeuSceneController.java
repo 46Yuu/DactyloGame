@@ -1,15 +1,11 @@
 package com.example.controller;
 
-import java.text.DecimalFormat;
-import java.util.Random;
-import java.util.TimerTask;
-
-import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.Caret.CaretVisibility;
 
-
 import com.example.modele.PartieSoloJeu;
-import com.example.modele.PartieSoloNormal;
+
+import java.text.DecimalFormat;
+import java.util.Random;
 
 import javafx.util.Duration;
 import javafx.animation.Animation;
@@ -23,30 +19,22 @@ import javafx.scene.input.KeyEvent;
 
 public class SoloJeuSceneController extends SoloNormalSceneController{
 
-    //ModeleJeu modele;
-
     PartieSoloJeu jeu;
     Random rand = new Random();
     Timeline time;
-    private static final int nombreMotPourAugmenterNiveau = 100;
 
-   
     @FXML
     private Label lblDonneeNiveau;
-
 
     @FXML
     private Label lblDonneeVie;
 
-
     @FXML
     private Label lblTexteNiveau;
-
 
     @FXML
     private Label lblTexteVie;
 
-    
     @Override
     @FXML
     void areaOnKeyPressed(KeyEvent event){
@@ -114,12 +102,12 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             }
             if(motCorrecte){
                 jeuSolo.ajoutCharUtilesTemporaire();
+                execNumMots();
             }
             else {
                 enleverPv(erreurs);
             }
             testBonus(length);
-            execNumMots();
             ajoutNouveauMot(memCaretPos);
             updateScene();
         }
@@ -139,7 +127,6 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             return true;
         }
     }
-
     
     @Override
     protected boolean charIncorrecte(int caretPos){
@@ -280,15 +267,10 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
             ictaArea.deleteText(1, ictaArea.getCaretPosition());
             jeuSolo.enleverMotEnTeteDeFile();
         }
-        
     }
 
-    
     protected void ajoutNouveauMotTimer(int caretPos){
         PartieSoloJeu jeuSolo = (PartieSoloJeu)(jeu);
-        //A voir
-        //jeuSolo.resetCharUtilesTemporaire();
-
         String nouveauMot = jeuSolo.ajoutMotALaFile();
         ictaArea.appendText(nouveauMot+" ");
         ictaArea.setStyle(ictaArea.getLength()-nouveauMot.length()-1, ictaArea.getLength(), "-fx-font-size: 18px;");
@@ -298,28 +280,14 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
         ictaArea.moveTo(caretPos+1);
     }
 
-    
-
     private void ajoutMotBonus(String mot){
         int length = mot.length()+1;
         int ictaLength = ictaArea.getLength();
         ictaArea.setStyle(ictaLength-length, ictaLength-1, "-fx-fill: blue; -fx-font-size: 18px;");
     }
 
-    // public void setModele(ModeleJeu modele) {
-    //     this.modele = modele;
-    //     //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
-    //     modele.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
-    //         ictaArea.moveTo(1);
-    //         ictaArea.setWrapText(true);
-    //         ictaArea.setEditable(false);
-    //         ictaArea.setShowCaret(CaretVisibility.ON);
-    //         ictaArea.setStyle(0,ictaArea.getLength(),"-fx-font-size: 18px;");});
-    // }
-
     public void setJeu(PartieSoloJeu jeu) {
         this.jeu = jeu;
-        //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
         jeu.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
             ictaArea.moveTo(1);
             ictaArea.setWrapText(true);
@@ -353,7 +321,6 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
         int numMots = jeuSolo.getNumMots();
         jeuSolo.setNumMots(numMots-1);
         if(numMots==0){
-            //jeuSolo.setNumMots(1);
             jeuSolo.reinitialiserNumMots();
             jeuSolo.incrNiveau();
             updateScene();
@@ -364,27 +331,20 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
 
     @Override
     public void affichageDonneeFinDeJeu(){
-
+        DecimalFormat df = new DecimalFormat("0.00");
         lblTexteVie.setVisible(false);
         lblDonneeVie.setVisible(false);
         lblTexteNiveau.setVisible(false);
         lblDonneeNiveau.setVisible(false);
-        
         lblTextePrecision.setVisible(true);
         lblTexteRegularite.setVisible(true);
         lblTexteVitesse.setVisible(true);
         lblDonneePrecision.setVisible(true);
         lblDonneeRegularite.setVisible(true);
         lblDonneeVitesse.setVisible(true);
-
-        DecimalFormat df = new DecimalFormat("0.00");
         lblDonneePrecision.setText(df.format(jeu.getStatsPrecision())+"");
         lblDonneeRegularite.setText(df.format(jeu.getStatsRegularite())+"");
         lblDonneeVitesse.setText(df.format(jeu.getStatsVitesse())+"");
-        
-
-        
-
     }
 
 

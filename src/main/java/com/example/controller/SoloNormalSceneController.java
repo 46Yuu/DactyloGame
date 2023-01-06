@@ -1,20 +1,17 @@
 package com.example.controller;
 
-import java.text.DecimalFormat;
-import java.util.Random;
-import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.Caret.CaretVisibility;
 
 import com.example.modele.PartieSoloNormal;
 
+import java.text.DecimalFormat;
+import java.util.Random;
 
 import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -304,15 +301,10 @@ public class SoloNormalSceneController {
         lblDonneePrecision.setVisible(true);
         lblDonneeRegularite.setVisible(true);
         lblDonneeVitesse.setVisible(true);
-
         DecimalFormat df = new DecimalFormat("0.00");
         lblDonneePrecision.setText(df.format(jeu.getStatsPrecision())+"");
         lblDonneeRegularite.setText(df.format(jeu.getStatsRegularite())+"");
         lblDonneeVitesse.setText(df.format(jeu.getStatsVitesse())+"");
-        
-
-        
-
     }
 
 

@@ -1,24 +1,16 @@
 package com.example.vue;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.stage.Stage;
-
 
 import com.example.modele.*;
 
-/**
- * Hello world!
- *
- */
 public class App extends Application
 {
-
-
-    public static void main( String[] args )
-    {
+    public static void main( String[] args){
         launch(args);
     }
 
@@ -36,32 +28,14 @@ public class App extends Application
     public void start(Stage primaryStage) throws Exception {
         try {
             System.out.print("");
-            
-            // //URL url = Paths.get("./src/main/resources/MainScene.fxml").toUri().toURL();
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloNormalScene.fxml"));
-            // //Parent root = FXMLLoader.load(url);
-            // Parent root = loader.load();
-            // SoloNormalController controller = loader.getController();
-            // Jeu jeu = new Jeu(creationParametreSoloNormal());
-            // Modele modele = new Modele(jeu);
-            // controller.setModele(modele);
-            // modele.initialize();
-
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixScene.fxml"));
-            Parent root = loader.load();
-
-
-            
-            Scene scene = new Scene(root);
-            
-            
+            Parent root = loader.load();      
+            Scene scene = new Scene(root); 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Choix");
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 }
