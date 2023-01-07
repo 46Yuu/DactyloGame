@@ -115,12 +115,23 @@ public class Parametre {
         langue = builder.langue;
     }
 
+    /**
+     * Renvoie la liste des parametres de la partie
+     * en String pour pouvoir l'afficher.
+     * @return String
+     */
     @Override
     public String toString() {
         return "Parametre [vitesse=" + vitesse + ", frequenceBonus=" + frequenceBonus + ", texteATaper=" + texteATaper
                 + ", mode=" + mode + ", vies=" + vies + ", niveau=" + niveau + ", limiteDeTemps=" +limiteDeTemps + ", langue=" + langue + "]";
     }
 
+    /**
+     * Getter pour obtenir le path qui permettra de
+     * récupérer la liste de mots à utiliser.
+     * @param langue
+     * @return String selon le choix du joueur.
+     */
     private static String getPath(String langue){
         if(langue.compareTo("FR") == 0){
             return textFr;
@@ -133,24 +144,43 @@ public class Parametre {
         }
     }
 
+    /**
+     * Getter du texte à taper.
+     * @return String
+     */
     public String getTexteATaper() {
         return texteATaper;
     }
     
+    /**
+     * Getter de la limite de temps.
+     * @return int
+     */
     public int getLimiteDeTemps() {
         return limiteDeTemps;
     }
 
+    /**
+     * Getter du mode de jeu.
+     * @return String
+     */
     public String getMode() {
         return mode;
     }
 
+    /**
+     * Getter du nombre de points de vie.
+     * @return int
+     */
     public int getVies() {
         return vies;
     }
 
+    /**
+     * Getter du niveau de départ.
+     * @return int
+     */
     public int getNiveau() {
         return niveau;
     }
-    
 }

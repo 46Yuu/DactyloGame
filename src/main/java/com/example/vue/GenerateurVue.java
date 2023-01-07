@@ -1,7 +1,5 @@
 package com.example.vue;
 
-import com.example.controller.ChoixParamSoloJeuController;
-import com.example.controller.ChoixParamSoloNormalController;
 import com.example.controller.SoloJeuSceneController;
 import com.example.controller.SoloNormalSceneController;
 import com.example.modele.Parametre;

@@ -32,19 +32,27 @@ public class PartieSoloNormal {
         this.initializerFiles();
     }
     
+    /**
+     * Getter pour le temps de jeu restant.
+     * @return int
+     */
     public int getTempsJeu(){
         return tempsJeu;
     }
 
-    /*
-     * Vérifie si la file est pleine ou non. Renvoie true si il ya encore de l'espace et false sinon
+    /**
+     * Vérifie si la file est pleine ou non.
+     * @return boolean true si la file n'est pas pleine.
+     * @return boolean false si la file est pleine.
      */
     public boolean fileNonPleine(){
         return file.size() < tailleMaxFileDeMot;
     }
 
-    /*
-     * Ajoute le prochain mot à la file
+    /**
+     * Ajoute le premier mot de la seconde file qui correspond
+     * aux nouveaux mots à ajouter à la file principale.
+     * @return String du mot ajouté
      */
     public String ajoutMotALaFile(){
         //On enleve le premier élement de la fileTemp qu'on ajoute à la fin de la file
@@ -56,9 +64,10 @@ public class PartieSoloNormal {
         return "";
     }
 
-    /*
-     * Supprime le mot en tête de file pour la validation et rajoute le prochain puis le retourne pour
-     * son affichage sur l'interface graphique
+    /**
+     * Fonction qui permet de valider le premier mot de la file en 
+     * l'enlevant et en ajoutant à la fin de la file un nouveau mot.
+     * @return Le String du nouveau mot ajouté à la file.
      */
     public String validerMot(){
         String s = "";
@@ -67,12 +76,17 @@ public class PartieSoloNormal {
         return s;
     }
 
+    /**
+     * Fonction qui enleve le premier élément de la file
+     * principale.
+     */
     public void enleverMotEnTeteDeFile(){
         if(!file.isEmpty()) file.removeFirst();
     }
     
-    /*
-     * Initialize la file des éléments à taper
+    /**
+     * Fonction permettant d'initialiser les files de mots 
+     * et de mettre les premiers mots dans la file.
      */
     public void initializerFiles(){
         System.out.println("-----------------------------------------------------------------------");
@@ -88,14 +102,28 @@ public class PartieSoloNormal {
         }
     }
 
+    /**
+     * Getter pour la file principale de mots.
+     * @return LikedList<String> 
+     */
     public LinkedList<String> getFile() {
         return file;
     }
 
+    /**
+     * Getter pour les parametres de jeu.
+     * @return Parametre
+     */
     public Parametre getParametre(){
         return parametre;
     }
 
+    /**
+     * Fonction qui permet d'obtenir un String correspondant à
+     * tous les mots qui sont présent dans la file de mots
+     * principale.
+     * @return String
+     */
     public String getStringOfFile(){
         String res = " ";
         for(int i = 0;i<file.size(); i++){
@@ -104,77 +132,125 @@ public class PartieSoloNormal {
         return res;
     }
 
+    /**
+     * Getter de la file de mots contenant tout 
+     * les mots qui seront ajouté a la file principale.
+     * @return LinkedList<String>
+     */
     public LinkedList<String> getFileSnd() {
         return fileSnd;
     }
     
+    /**
+     * Fonction qui augmente la variable du nombre de 
+     * caractères utile par 1.  
+     */
     public void incrCharUtilesTemporaire() {
         charUtilesTemporaire++;
     }
+
+    /**
+     * Fonction qui réduit la variable du nombre de 
+     * caractères utile par 1.  
+     */
     public void decrCharUtilesTemporaire() {
         charUtilesTemporaire--;
     }
 
+    /**
+     * Fonction qui augmente la variable du nombre 
+     * d'appui de touches par 1.
+     */
     public void incrNbAppuiTouches() {
         nbAppuiTouches++;
     }
 
+    /**
+     * Fonction qui ajoute le nombres de caractère
+     * utile écrit dans le mot qui vient d'être validé.
+     */
     public void ajoutCharUtilesTemporaire(){
         charUtiles += charUtilesTemporaire;
     }
 
+    /**
+     * Fonction qui remet à 0 la variable charUtilesTemporaire.
+     */
     public void resetCharUtilesTemporaire(){
         charUtilesTemporaire = 0;
     }
 
+    /**
+     * Ajoute le temps écoulé entre deux charUtiles à la variable 
+     * resPourCalculMoyenne et remet le temps écoulé à 0.
+     */
     public void ajoutTempsCharUtile(){
         resPourCalculMoyenne+=tempsEntreChaqueCharUtile;
         tempsEntreChaqueCharUtile = 0;
     }
 
-
+    /**
+     * Lance les fonctions qui permettent d'intialiser et 
+     * lancer les timers de la partie.
+     */
     public void startTimerNormal() {
         startTimerStat();
         startTimerCompteur();
     }
 
-    public void getStats(){
-        double mpm = (charUtiles/(0.5))/5;
-        System.out.println("char utiles : "+charUtiles);
-        System.out.println("appuie touches : "+nbAppuiTouches);
-        double precision = (charUtiles/nbAppuiTouches)*100;
-        double ecartType = calculEcartType();
-        System.out.println("----------STATS----------");
-        System.out.println("Vitesse : "+mpm);
-        System.out.println("Précision : "+df.format(precision));
-        System.out.println("Regularité : "+df.format(ecartType));
+    /**
+     * Fonction qui permet de terminer le timer.
+     */
+    public void endTimer(){
         timer.cancel();
     }
 
+    /**
+     * Calcule la vitesse du joueur en mots par 
+     * minutes et la renvoie.
+     * @return double
+     */
     public double getStatsVitesse(){
         return (charUtiles/(0.5))/5;
     }
 
+    /**
+     * Calcule la précision du joueur et la renvoie.
+     * @return double
+     */
     public double getStatsPrecision(){
         return (charUtiles/nbAppuiTouches)*100;
     }
 
+    /**
+     * Calcule la régularité du joueur , c'est à dire
+     * le temps moyen entre deux touches utiles. 
+     * @return double
+     */
     public double getStatsRegularite(){
         return calculEcartType();
     }
 
+    /**
+     * Lance le timer des stats qui permettra de le terminer
+     * à la fin du temps limité.
+     */
     private void startTimerStat(){
         timerActive = true;
         timer = new Timer();
         TimerTask task = new TimerTask(){ 
             @Override
             public void run(){
-                getStats();
+                endTimer();
             }
         };
         timer.schedule(task,parametre.getLimiteDeTemps()*1000); 
     }
 
+    /**
+     * Lance le timer qui permet de calculer le temps écoulé
+     * entre deux touches utiles.
+     */
     public void startTimerCompteur(){
         TimerTask taskCounterEcartType = new TimerTask() {
             @Override
@@ -185,22 +261,44 @@ public class PartieSoloNormal {
         timer.scheduleAtFixedRate(taskCounterEcartType,0*1000, 1*1000);
     }
 
+    /**
+     * Réduit de 1 l'affichage du timer de jeu. 
+     */
     public void decrCountdown(){
         tempsJeu--;
     }
 
+    /**
+     * Getter du temps de jeu restant.
+     * @return int 
+     */
     public int getCountdown(){
         return tempsJeu;
     }
 
+    /**
+     * Getter du timer du temps de jeu.
+     * @return Timer 
+     */
     public Timer getTimer(){
         return this.timer;
     }
     
+    /**
+     * Getter pour savoir si le timer du temps de jeu
+     * est actif ou pas.
+     * @return boolean
+     */
     public boolean getTimerActive(){
         return timerActive;
     }
 
+    /**
+     * Fonction qui permet de faire le calcul de 
+     * l'écart type entre chaque charactère utile 
+     * et le temps entre eux.
+     * @return double
+     */
     protected double calculEcartType(){
         if(charUtiles == 0){
             return 0;
@@ -210,28 +308,50 @@ public class PartieSoloNormal {
         }
     }
 
+    /**
+     * Getter pour le nombre total de charactères
+     * utiles.
+     * @return double
+     */
     public double getCharUtiles() {
         return charUtiles;
     }
 
-
+    /**
+     * 
+     */
     public interface Listener {
         void onChange(PartieSoloNormal partieSoloNormal);
     }
 
+    /**
+     * Ajoute un listener au mode Solo Normal.
+     * @param listener
+     */
     public void addListener(Listener listener) {
         listeners.add(listener);
     }
 
+    /**
+     * Getter pour le texte de départ.
+     * @return String
+     */
     public String getBeginningText() {
         return beginningText;
     }
 
+    /**
+     * Setter pour le texte de départ.
+     * @param beginningText
+     */
     public void setBeginningText(String beginningText) {
         this.beginningText = beginningText;
         notifyObservers();
     }
 
+    /**
+     * 
+     */
     public void initialize(){
         setBeginningText(getStringOfFile());
         notifyObservers();

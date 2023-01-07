@@ -23,13 +23,19 @@ public class ChoixParamSoloJeuController {
     @FXML
     private ChoiceBox<KeyValuePair> cbVie;
 
+    /**
+     * Valide les paramètres choisis par le 
+     * joueur.
+     * @param event
+     */
     @FXML
     void validation(ActionEvent event) {
         System.out.println("Validation SoloJeu");
-        Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu(cbLangue.getValue().getKey(),Integer.parseInt(cbVie.getValue().getKey()),Integer.parseInt(cbNiveau.getValue().getKey()) );
-
+        Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu(
+            cbLangue.getValue().getKey(),
+            Integer.parseInt(cbVie.getValue().getKey()),
+            Integer.parseInt(cbNiveau.getValue().getKey()));
         vuePartieSoloJeu.lancerVue();
-
     }
 
     /*
@@ -39,17 +45,13 @@ public class ChoixParamSoloJeuController {
         cbLangue.getItems().add(new KeyValuePair("FR", "Français"));
         cbLangue.getItems().add(new KeyValuePair("EN", "Anglais"));
         cbLangue.setValue(new KeyValuePair("FR", "Français"));
-
         cbNiveau.getItems().add(new KeyValuePair("1", "Facile"));
         cbNiveau.getItems().add(new KeyValuePair("5", "Moyen"));
         cbNiveau.getItems().add(new KeyValuePair("8", "Difficile"));
         cbNiveau.setValue(new KeyValuePair("1", "Facile"));
-
         cbVie.getItems().add(new KeyValuePair("30", "30"));
         cbVie.getItems().add(new KeyValuePair("50", "50"));
         cbVie.getItems().add(new KeyValuePair("100", "100"));
         cbVie.setValue(new KeyValuePair("50", "50"));
-
     }
-
 }
