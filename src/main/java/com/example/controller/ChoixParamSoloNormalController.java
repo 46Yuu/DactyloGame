@@ -2,12 +2,12 @@ package com.example.controller;
 
 import com.example.modele.KeyValuePair;
 import com.example.vue.GenerateurVue;
-import com.example.vue.Vue;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 
 public class ChoixParamSoloNormalController {
 
@@ -20,11 +20,17 @@ public class ChoixParamSoloNormalController {
     @FXML
     private ChoiceBox<KeyValuePair> cbTemps;
 
+    private Stage stage;
+
+    public void setStage(Stage s) {
+        stage = s;
+    }
+    
     @FXML
     void validation(ActionEvent event) {
         System.out.println("Validation SoloNormal");
-        Vue vuePartieSoloNormal = GenerateurVue.genererVuePartieSoloNormal(cbLangue.getValue().getKey(),Integer.parseInt(cbTemps.getValue().getKey()) );
-        vuePartieSoloNormal.lancerVue();
+        GenerateurVue.Vue vuePartieSoloNormal = GenerateurVue.genererVuePartieSoloNormal(cbLangue.getValue().getKey(),Integer.parseInt(cbTemps.getValue().getKey()) );
+        vuePartieSoloNormal.lancerVue(stage);
     }
 
     /**

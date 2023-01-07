@@ -2,14 +2,15 @@ package com.example.controller;
 
 import com.example.modele.KeyValuePair;
 import com.example.vue.GenerateurVue;
-import com.example.vue.Vue;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 
 public class ChoixParamSoloJeuController {
+    
 
     @FXML
     private Button btnValider;
@@ -23,6 +24,12 @@ public class ChoixParamSoloJeuController {
     @FXML
     private ChoiceBox<KeyValuePair> cbVie;
 
+    private Stage stage;
+
+    public void setStage(Stage s) {
+        stage = s;
+    }
+
     /**
      * Valide les paramètres choisis par le 
      * joueur.
@@ -31,11 +38,11 @@ public class ChoixParamSoloJeuController {
     @FXML
     void validation(ActionEvent event) {
         System.out.println("Validation SoloJeu");
-        Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu(
+        GenerateurVue.Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu(
             cbLangue.getValue().getKey(),
             Integer.parseInt(cbVie.getValue().getKey()),
             Integer.parseInt(cbNiveau.getValue().getKey()));
-        vuePartieSoloJeu.lancerVue();
+        vuePartieSoloJeu.lancerVue(stage);
     }
 
     /*

@@ -1,5 +1,7 @@
 package com.example.vue;
 
+import com.example.controller.ChoixParamSoloJeuController;
+import com.example.controller.ChoixParamSoloNormalController;
 import com.example.controller.SoloJeuSceneController;
 import com.example.controller.SoloNormalSceneController;
 import com.example.modele.Parametre;
@@ -12,6 +14,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GenerateurVue {
+    public interface Vue{
+        void lancerVue(Stage ancienStage);
+    
+    }
+    
 
 
     public static Parametre creationParametreSoloNormal(String langue, int temps){
@@ -42,16 +49,18 @@ public class GenerateurVue {
     public static Vue genererVueParamPartieSoloNormal(){
         return new Vue() {
             @Override
-            public void lancerVue() {
+            public void lancerVue(Stage ancienStage) {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixParamSoloNormal.fxml"));
                     Parent root = loader.load();
-                    // ChoixParamSoloNormalController controller = loader.getController();
-                    // controller.initialize();
-
+                    ChoixParamSoloNormalController controller = loader.getController();
+                    controller.setStage(stage);
+                    
+                    stage.setResizable(false);
                     stage.setScene(new Scene(root));  
                     stage.show();
+                    ancienStage.close();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -62,15 +71,17 @@ public class GenerateurVue {
     public static Vue genererVueParamPartieSoloJeu(){
         return new Vue() {
             @Override
-            public void lancerVue() {
+            public void lancerVue(Stage ancienStage) {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixParamSoloJeu.fxml"));
                     Parent root = loader.load();
-                    // ChoixParamSoloJeuController controller = loader.getController();
-                    // controller.initialize();
+                    ChoixParamSoloJeuController controller = loader.getController();
+                    controller.setStage(stage);
+                    stage.setResizable(false);
                     stage.setScene(new Scene(root));  
                     stage.show();
+                    ancienStage.close();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -81,7 +92,7 @@ public class GenerateurVue {
     public static Vue genererVuePartieSoloNormal(String langue, int temps){
         return new Vue() {
             @Override
-            public void lancerVue() {
+            public void lancerVue(Stage ancienStage) {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloNormalScene.fxml"));
@@ -89,10 +100,13 @@ public class GenerateurVue {
                     SoloNormalSceneController controller = loader.getController();
                     PartieSoloNormal jeu = new PartieSoloNormal(creationParametreSoloNormal(langue,temps));
                     controller.setJeu(jeu);
+                    controller.setStage(stage);
                     jeu.initialize();
                     controller.initializeScene();
+                    stage.setResizable(false);
                     stage.setScene(new Scene(root));  
                     stage.show();
+                    ancienStage.close();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -103,7 +117,7 @@ public class GenerateurVue {
     public static Vue genererVuePartieSoloJeu(String langue, int vies,int niveau){
         return new Vue() {
             @Override
-            public void lancerVue() {
+            public void lancerVue(Stage ancienStage) {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloJeuScene.fxml"));
@@ -111,10 +125,13 @@ public class GenerateurVue {
                     SoloJeuSceneController controller = loader.getController();
                     PartieSoloJeu jeu = new PartieSoloJeu(creationParametreSoloJeu(langue,vies,niveau));
                     controller.setJeu(jeu);
+                    controller.setStage(stage);
                     jeu.initialize();
                     controller.initializeScene();
+                    stage.setResizable(false);
                     stage.setScene(new Scene(root));  
                     stage.show();
+                    ancienStage.close();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }

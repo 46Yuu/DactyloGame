@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import com.example.controller.ChoixSceneController;
 import com.example.modele.*;
 
 public class App extends Application
@@ -30,7 +31,10 @@ public class App extends Application
             System.out.print("");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixScene.fxml"));
             Parent root = loader.load();      
-            Scene scene = new Scene(root); 
+            Scene scene = new Scene(root);
+            ChoixSceneController controller = loader.getController();
+            controller.setStage(primaryStage); 
+            primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Choix");
             primaryStage.show();
