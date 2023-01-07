@@ -16,6 +16,8 @@ public class PartieSoloJeu extends PartieSoloNormal{
     public PartieSoloJeu(Parametre p) {
         super(p);
         reinitialiserNumMots();
+        pv = p.getVies();
+        niveau = p.getNiveau();
         this.initializerFiles();
     }
     

@@ -1,5 +1,7 @@
 package com.example.vue;
 
+import com.example.controller.ChoixParamSoloJeuController;
+import com.example.controller.ChoixParamSoloNormalController;
 import com.example.controller.SoloJeuSceneController;
 import com.example.controller.SoloNormalSceneController;
 import com.example.modele.Parametre;
@@ -14,17 +16,71 @@ import javafx.stage.Stage;
 public class GenerateurVue {
 
 
-    public static Parametre creationParametreSoloNormal(){
+    public static Parametre creationParametreSoloNormal(String langue, int temps){
         return Parametre.builder()
         .vitesse(4.0)
         .frequenceBonus(0)
+        .langue(langue)
         .texteATaper()
         .mode("Solo")
         .vies(0)
-        .niveau(0).build();
+        .niveau(0)
+        .limiteDeTemps(temps)
+        .build();
+    }
+
+    public static Parametre creationParametreSoloJeu(String langue, int vies,int niveau){
+        return Parametre.builder()
+        .vitesse(4.0)
+        .frequenceBonus(0)
+        .langue(langue)
+        .texteATaper()
+        .mode("Solo")
+        .vies(vies)
+        .niveau(niveau)
+        .build();
+    }
+
+    public static Vue genererVueParamPartieSoloNormal(){
+        return new Vue() {
+            @Override
+            public void lancerVue() {
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixParamSoloNormal.fxml"));
+                    Parent root = loader.load();
+                    // ChoixParamSoloNormalController controller = loader.getController();
+                    // controller.initialize();
+
+                    stage.setScene(new Scene(root));  
+                    stage.show();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+    public static Vue genererVueParamPartieSoloJeu(){
+        return new Vue() {
+            @Override
+            public void lancerVue() {
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChoixParamSoloJeu.fxml"));
+                    Parent root = loader.load();
+                    // ChoixParamSoloJeuController controller = loader.getController();
+                    // controller.initialize();
+                    stage.setScene(new Scene(root));  
+                    stage.show();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
     
-    public static Vue genererVuePartieSoloNormal(){
+    public static Vue genererVuePartieSoloNormal(String langue, int temps){
         return new Vue() {
             @Override
             public void lancerVue() {
@@ -33,7 +89,7 @@ public class GenerateurVue {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloNormalScene.fxml"));
                     Parent root = loader.load();
                     SoloNormalSceneController controller = loader.getController();
-                    PartieSoloNormal jeu = new PartieSoloNormal(creationParametreSoloNormal());
+                    PartieSoloNormal jeu = new PartieSoloNormal(creationParametreSoloNormal(langue,temps));
                     controller.setJeu(jeu);
                     jeu.initialize();
                     controller.initializeScene();
@@ -46,7 +102,7 @@ public class GenerateurVue {
         };
     }
 
-    public static Vue genererVuePartieSoloJeu(){
+    public static Vue genererVuePartieSoloJeu(String langue, int vies,int niveau){
         return new Vue() {
             @Override
             public void lancerVue() {
@@ -55,7 +111,7 @@ public class GenerateurVue {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SoloJeuScene.fxml"));
                     Parent root = loader.load();
                     SoloJeuSceneController controller = loader.getController();
-                    PartieSoloJeu jeu = new PartieSoloJeu(creationParametreSoloNormal());
+                    PartieSoloJeu jeu = new PartieSoloJeu(creationParametreSoloJeu(langue,vies,niveau));
                     controller.setJeu(jeu);
                     jeu.initialize();
                     controller.initializeScene();

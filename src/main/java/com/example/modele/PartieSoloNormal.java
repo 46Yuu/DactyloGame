@@ -18,7 +18,7 @@ public class PartieSoloNormal {
     DecimalFormat df = new DecimalFormat("0.00");
     /*La taille maximale d'élements pouvant rentrer dans la file de mots */
     private static final int tailleMaxFileDeMot = 15;
-    private int tempsJeu = parametre.getLimiteDeTemps()-1;
+    private int tempsJeu;
     /* La file des 15 prochain mots à taper. Utiliser add() removeFirst() et isEmpty  */
     protected LinkedList<String> file;
     protected LinkedList<String> fileSnd;
@@ -28,6 +28,7 @@ public class PartieSoloNormal {
 
     public PartieSoloNormal(Parametre p) {
         parametre = p;
+        tempsJeu = parametre.getLimiteDeTemps()-1;
         this.initializerFiles();
     }
     

@@ -144,5 +144,13 @@ public class Parametre {
     public String getMode() {
         return mode;
     }
+
+    public int getVies() {
+        return vies;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
     
 }

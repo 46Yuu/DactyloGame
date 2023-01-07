@@ -27,16 +27,15 @@ public class ChoixSceneController {
     @FXML
     void btnSoloJeuClicked(ActionEvent event) {
         System.out.println("Mode solo Jeu Clicked");
-        Vue vuePartieSoloJeu = GenerateurVue.genererVuePartieSoloJeu();
-        vuePartieSoloJeu.lancerVue();
+        Vue vue = GenerateurVue.genererVueParamPartieSoloJeu();
+        vue.lancerVue();
     }
 
     @FXML
     void btnSoloNormalClicked(ActionEvent event) {
         System.out.println("Mode solo Normal Clicked");
-        Vue vuePartieSoloNormal = GenerateurVue.genererVuePartieSoloNormal();
-
-        vuePartieSoloNormal.lancerVue();
+        Vue vue = GenerateurVue.genererVueParamPartieSoloNormal();
+        vue.lancerVue();
     }
 
 }
