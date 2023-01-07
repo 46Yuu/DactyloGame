@@ -318,9 +318,14 @@ public class PartieSoloNormal {
     }
 
     /**
-     * 
+     * L'interface fonctionelle des listeners sur notre objet PartieSoloNormal
      */
     public interface Listener {
+        /**
+         * Methode à executer à chaque modification de l'objet c'est à dire
+         * chaque appel à notifyobservers
+         * @param partieSoloNormal
+         */
         void onChange(PartieSoloNormal partieSoloNormal);
     }
 
@@ -350,7 +355,8 @@ public class PartieSoloNormal {
     }
 
     /**
-     * 
+     * Modifie beginning text en y mettant les mots qu'il ya dans file
+     * et il previens les listeners
      */
     public void initialize(){
         setBeginningText(getStringOfFile());

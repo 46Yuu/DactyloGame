@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.ChoixSceneController">
    <children>
       <Label layoutX="157.0" layoutY="41.0" text="Choix du mode de jeu">
@@ -23,7 +22,7 @@
             <Font size="19.0" />
          </font>
       </Button>
-      <Button layoutX="405.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnMultiJoueurClicked" prefHeight="53.0" prefWidth="174.0" text="Multi-joueur" textFill="#171717e5">
+      <Button disable="true" layoutX="405.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnMultiJoueurClicked" prefHeight="53.0" prefWidth="174.0" text="Multi-joueur" textFill="#171717e5">
          <font>
             <Font size="19.0" />
          </font>

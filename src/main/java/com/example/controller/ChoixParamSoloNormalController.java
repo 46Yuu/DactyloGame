@@ -26,6 +26,10 @@ public class ChoixParamSoloNormalController {
         stage = s;
     }
     
+    /**
+     * Lance le mode Solo normal en fonction des paramètres
+     * @param event
+     */
     @FXML
     void validation(ActionEvent event) {
         System.out.println("Validation SoloNormal");

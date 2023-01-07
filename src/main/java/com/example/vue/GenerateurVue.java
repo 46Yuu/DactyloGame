@@ -100,7 +100,6 @@ public class GenerateurVue {
                     SoloNormalSceneController controller = loader.getController();
                     PartieSoloNormal jeu = new PartieSoloNormal(creationParametreSoloNormal(langue,temps));
                     controller.setJeu(jeu);
-                    controller.setStage(stage);
                     jeu.initialize();
                     controller.initializeScene();
                     stage.setResizable(false);
@@ -125,7 +124,6 @@ public class GenerateurVue {
                     SoloJeuSceneController controller = loader.getController();
                     PartieSoloJeu jeu = new PartieSoloJeu(creationParametreSoloJeu(langue,vies,niveau));
                     controller.setJeu(jeu);
-                    controller.setStage(stage);
                     jeu.initialize();
                     controller.initializeScene();
                     stage.setResizable(false);

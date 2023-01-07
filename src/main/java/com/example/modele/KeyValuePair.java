@@ -9,7 +9,11 @@ public class KeyValuePair {
         this.value = value;
     }
  
-   public String getKey()   {    return key;    }
+    public String getKey(){    
+        return key;
+    }
  
-   public String toString() {    return value;  }
- }
+    public String toString(){    
+        return value;
+    }
+}

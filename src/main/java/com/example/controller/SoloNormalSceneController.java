@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 public class SoloNormalSceneController {
     //ModeleNormal modele;
@@ -50,11 +49,6 @@ public class SoloNormalSceneController {
     @FXML
     protected Label lblTexteVitesse;
 
-    private Stage stage;
-
-    public void setStage(Stage s) {
-        stage = s;
-    }
 
     /**
      * Fonction appellé à chaque appui d'une touche du clavier 
@@ -322,7 +316,11 @@ public class SoloNormalSceneController {
     public void setJeu(PartieSoloNormal jeu) {
         System.out.println("Voici donc le bon set ------------------------------");
         this.jeu = jeu;
-        //modele.addListener(l -> {staArea.replaceText(l.getBeginningText());ictaArea.replaceText(l.getBeginningText());ictaArea.start(SelectionPolicy.CLEAR);});
+
+        /**
+         * Ajout du listener qui va modifier l'affichage à chaque changement c'est-à-dire
+         * à chaque appel de notify observers du jeu
+         */
         jeu.addListener(l -> {ictaArea.replaceText(l.getBeginningText());
             ictaArea.moveTo(1);
             ictaArea.setWrapText(true);

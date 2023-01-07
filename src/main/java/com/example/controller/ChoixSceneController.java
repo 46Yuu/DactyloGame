@@ -24,11 +24,20 @@ public class ChoixSceneController {
         .niveau(0).build();
     }
 
+    /**
+     * Fonction qui lance le mode multijoueur
+     * @param event
+     */
+    
     @FXML
     void btnMultiJoueurClicked(ActionEvent event) {
         System.out.println("Mode multijoueur clicked");
     }
 
+    /**
+     * Fonction qui lance le choix des paramètres du mode solo jeu
+     * @param event
+     */
     @FXML
     void btnSoloJeuClicked(ActionEvent event) {
         System.out.println("Mode solo Jeu Clicked");
@@ -36,6 +45,10 @@ public class ChoixSceneController {
         vue.lancerVue(stage);
     }
 
+    /**
+     * Fonction qui lance le choix des paramètres du mode solo normal
+     * @param event
+     */
     @FXML
     void btnSoloNormalClicked(ActionEvent event) {
         System.out.println("Mode solo Normal Clicked");

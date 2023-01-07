@@ -31,8 +31,7 @@ public class ChoixParamSoloJeuController {
     }
 
     /**
-     * Valide les paramètres choisis par le 
-     * joueur.
+     * Lance le mode Solo jeu en focntion des paramètres
      * @param event
      */
     @FXML
