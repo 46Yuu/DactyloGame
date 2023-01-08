@@ -22,8 +22,6 @@ pas cliquer dans le rectangle du TextArea car cela va changer la position du cur
 et donc faire rater le programme. Il faut aussi éviter de faire ctrl+a qui pourrait 
 aussi bloquer le programme.
 ## Fonctionnalités implementés
-/*Décriver les fonctionnalités effectivement implémentées et
-expliquant vos choix techniques originaux, le cas échéant*/
 Nous avons implémenté les modes normal et jeu du Solo. Chaque mode a son propre choix
 de paramètre avec une interface avant la partie. 
 Les mots du programme sont une liste de mot dans un fichier qui sera lu et mettra chaque
