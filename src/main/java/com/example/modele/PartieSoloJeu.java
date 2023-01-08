@@ -107,7 +107,6 @@ public class PartieSoloJeu extends PartieSoloNormal{
      */
     @Override
     public void initializerFiles(){
-        System.out.println("-----------------------------------------------------------------------");
         file = new LinkedList<String>();
         fileSnd = new LinkedList<String>();
         String[] texteSplit = parametre.getTexteATaper().split(" ");
@@ -186,5 +185,4 @@ public class PartieSoloJeu extends PartieSoloNormal{
     public static int getNombredemotpourchangerdeniveau() {
         return nombreDeMotPourChangerDeNiveau;
     }
-
 }

@@ -2,9 +2,11 @@
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/modele/Parametre.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/modele/PartieSoloJeu.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/SoloNormalSceneController.java
+/home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/ChoixParamSoloNormalController.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/modele/PartieSoloNormal.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/vue/GenerateurVue.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/MultiJoueurSceneController.java
+/home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/ChoixParamSoloJeuController.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/ChoixSceneController.java
 /home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/controller/SoloJeuSceneController.java
-/home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/vue/Vue.java
+/home/yuu/Desktop/Work/Complement POO/dactylo/src/main/java/com/example/modele/KeyValuePair.java

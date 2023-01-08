@@ -369,7 +369,4 @@ public class PartieSoloNormal {
     private void notifyObservers() {
         listeners.stream().forEach(l -> l.onChange(this));
     }
-
-
-
 }

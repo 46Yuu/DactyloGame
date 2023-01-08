@@ -321,11 +321,9 @@ public class SoloJeuSceneController extends SoloNormalSceneController{
         PartieSoloJeu jeuSolo = (PartieSoloJeu)(jeu);
         if(jeuSolo.getFile().size() >= 15){
             moveToNextMotSansAjoutNouveauMot(ictaArea.getCaretPosition());
-            System.out.println(jeuSolo.getFile().size());
         }
         else {
             ajoutNouveauMotTimer(ictaArea.getCaretPosition());
-            System.out.println(jeuSolo.getFile().size());
             ictaArea.moveTo(ictaArea.getCaretPosition()-1);
         }
     }

@@ -61,7 +61,9 @@ public class Parametre {
                 }
                 Random rand = new Random();
                 for(int i = 0; i < listeMots.size(); i++){
-                    texteATaper += listeMots.get(rand.nextInt(listeMots.size()))+" ";
+                    int numRandom = rand.nextInt(listeMots.size());
+                    texteATaper += listeMots.get(numRandom)+" ";
+                    listeMots.remove(numRandom);
                 }
                 read.close();
             }

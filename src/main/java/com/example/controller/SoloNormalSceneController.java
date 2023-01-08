@@ -68,8 +68,6 @@ public class SoloNormalSceneController {
         startTimer();
         int caretPos = ictaArea.getCaretPosition();
         String charTyped = event.getText();
-        System.out.println("Une key typed:  " + charTyped);
-        System.out.println(ictaArea.getText(caretPos, caretPos+1));
         if(event.getCode() == KeyCode.SPACE){
             verificationMot(caretPos);
         }
@@ -314,7 +312,6 @@ public class SoloNormalSceneController {
      * @param jeu mode Normal 
      */
     public void setJeu(PartieSoloNormal jeu) {
-        System.out.println("Voici donc le bon set ------------------------------");
         this.jeu = jeu;
 
         /**
@@ -328,5 +325,4 @@ public class SoloNormalSceneController {
             ictaArea.setShowCaret(CaretVisibility.ON);
             ictaArea.setStyle(0,ictaArea.getLength(),"-fx-font-size: 18px;");});
     }
-    
 }
