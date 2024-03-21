@@ -4,6 +4,15 @@ Hybride entre les logiciels d’entraînement dactylo classiques (comme sur les
 sites web Monkeytype 1, 10fastfingers 2, Dactylotest 3, KeyBR 4.. ) et Tetris, 
 notamment son mode multijoueur.
 
+## Images
+<img src="MarkdownFiles/image.png" width="80%">
+<img src="MarkdownFiles/image2.png" width="80%">
+<img src="MarkdownFiles/image3.png" width="80%">
+<img src="MarkdownFiles/image4.png" width="80%">
+<img src="MarkdownFiles/image5.png" width="80%">
+<img src="MarkdownFiles/image6.png" width="80%">
+
+
 ## Auteurs
 - Henri
 - Hermann
