@@ -1,16 +1,23 @@
-# dactylo
+# Dactylo
 
 Hybride entre les logiciels d’entraînement dactylo classiques (comme sur les
 sites web Monkeytype 1, 10fastfingers 2, Dactylotest 3, KeyBR 4.. ) et Tetris, 
 notamment son mode multijoueur.
+
+## Auteurs
+- Henri
+- Hermann
+
 ## Compilation et execution
 Pour lancer le projet il faudra compiler le projet puis l'executer  
 -Compilation : mvn compile  
 -Execution : mvn clean javafx:run  
+
 ## Lancement des Tests
 Voici les commandes pour le lancement des tests  
 -mvn clean  
 -mvn test
+
 ## Utilisation du programme
 A l'éxecution du programme , on devra choisir tout d'abord le mode de jeu
 auquel on voudra jouer, puis une fenêtre s'affichera avec les choix de paramètres
